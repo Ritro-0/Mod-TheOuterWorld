@@ -1,0 +1,21 @@
+{
+  "type": "theouterworld:outer_world",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "minecraft:plains",
+      "structure_overrides": [],
+      "features": false,
+      "layers": [
+        {
+          "block": "theouterworld:oxidized_basalt",
+          "height": 40
+        },
+        {
+          "block": "theouterworld:regolith",
+          "height": 20
+        }
+      ]
+    }
+  }
+}

@@ -18,6 +18,8 @@ public class ModItemGroups {
             .displayName(Text.translatable("itemgroup.theouterworld"))
             .entries((displayContext, entries) -> {
                 entries.add(ModBlocks.QUANTUM_PAD);
+                entries.add(ModBlocks.REGOLITH);
+                entries.add(ModBlocks.OXIDIZED_BASALT);
             })
             .build());
 

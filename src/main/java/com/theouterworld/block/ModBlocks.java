@@ -24,6 +24,27 @@ public class ModBlocks {
         )
     );
 
+    public static final Block REGOLITH = registerBlock(
+        "regolith",
+        key -> new Block(
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(0.5f, 0.5f) // Same hardness as sand
+                .sounds(BlockSoundGroup.SAND)
+        )
+    );
+
+    public static final Block OXIDIZED_BASALT = registerBlock(
+        "oxidized_basalt",
+        key -> new Block(
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(1.25f, 4.2f) // Same as basalt
+                .sounds(BlockSoundGroup.BASALT)
+                .requiresTool()
+        )
+    );
+
     private static Block registerBlock(String name, java.util.function.Function<RegistryKey<Block>, Block> factory) {
         Identifier id = Identifier.of(TemplateMod.MOD_ID, name);
         RegistryKey<Block> key = RegistryKey.of(Registries.BLOCK.getKey(), id);

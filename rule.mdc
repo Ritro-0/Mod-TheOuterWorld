@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+---
+
+Sending me back builds that don't compile with the run-client.bat is UNACCEPTABLE!!! Always check first that the build compiles with a simple ./gradlew.bat build. No further information unless necessary, because that often causes it to hang.
+Always make sure your methods are standard and up-to-date with the current Minecraft version that the mod runs on. Currently Fabric 1.21.10.
+I'm fairly new to modding, so always attach beginner-friendly explanations as to what you've done after each prompt.
+Fabric 1.21 needs a little “item asset” stub in assets/<modid>/items/ for every item that should use a model.
+I'm fairly new to coding. Please simplify your answers to accomidate, then provide brief explanations as to what the more technical side of it means.
+Use data/<modid>/recipe/ (singular). Do not keep duplicates under data/<modid>/recipes/.-

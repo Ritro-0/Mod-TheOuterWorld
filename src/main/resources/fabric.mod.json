@@ -23,13 +23,6 @@
 		]
 	},
 	"accessWidener": "theouterworld.accesswidener",
-	"mixins": [
-		"theouterworld.mixins.json",
-		{
-			"config": "theouterworld.client.mixins.json",
-			"environment": "client"
-		}
-	],
 	"custom": {
 		"modmenu": {
 			"badges": [ "library" ]

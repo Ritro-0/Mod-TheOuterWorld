@@ -1,5 +1,10 @@
 {
   "block.theouterworld.quantum_pad": "Quantum Pad",
+  "item.theouterworld.quantum_pad": "Quantum Pad",
+  "block.theouterworld.regolith": "Regolith",
+  "item.theouterworld.regolith": "Regolith",
+  "block.theouterworld.oxidized_basalt": "Oxidized Basalt",
+  "item.theouterworld.oxidized_basalt": "Oxidized Basalt",
   "itemgroup.theouterworld": "The Outer World"
 }
 
