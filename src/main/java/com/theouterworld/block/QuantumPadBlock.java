@@ -8,6 +8,8 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.entity.player.PlayerEntity;
@@ -96,6 +98,14 @@ public class QuantumPadBlock extends BlockWithEntity {
         if (isIgniter) {
             // Activate the quantum pad
             world.setBlockState(pos, state.with(ACTIVATED, true));
+            world.playSound(
+                null,
+                pos,
+                SoundEvents.BLOCK_BEACON_ACTIVATE,
+                SoundCategory.BLOCKS,
+                1.0F,
+                1.0F
+            );
             
             // Consume the item if not in creative mode
             if (!player.isCreative()) {

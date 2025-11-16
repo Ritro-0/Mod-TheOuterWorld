@@ -22,6 +22,12 @@
 			"com.theouterworld.TemplateModClient"
 		]
 	},
+	"mixins": [
+		{
+			"config": "theouterworld.client.mixins.json",
+			"environment": "client"
+		}
+	],
 	"accessWidener": "theouterworld.accesswidener",
 	"custom": {
 		"modmenu": {

@@ -11,11 +11,14 @@ import org.spongepowered.asm.mixin.Shadow;
 import com.theouterworld.TemplateMod;
 import com.theouterworld.registry.ModDimensions;
 
+import net.minecraft.client.render.DimensionEffects;
 import net.minecraft.client.render.SkyRendering;
 import net.minecraft.client.render.state.SkyRenderState;
 import net.minecraft.client.texture.AbstractTexture;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.ColorHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
 @Mixin(SkyRendering.class)
@@ -45,6 +48,15 @@ public abstract class SkyRenderingMixin {
     );
 
     @Unique
+    private static final Vec3d THEOUTERWORLD_DAY_SKY = new Vec3d(0.82D, 0.34D, 0.21D);
+
+    @Unique
+    private static final Vec3d THEOUTERWORLD_NIGHT_SKY = new Vec3d(0.05D, 0.05D, 0.10D);
+
+    @Unique
+    private static final Vec3d THEOUTERWORLD_SUNRISE = new Vec3d(0.94D, 0.48D, 0.26D);
+
+    @Unique
     @Nullable
     private AbstractTexture theouterworld$vanillaSunTexture;
 
@@ -68,15 +80,16 @@ public abstract class SkyRenderingMixin {
         this.theouterworld$outerworldMoonTexture = this.bindTexture(THEOUTERWORLD_MOON_TEXTURE);
     }
 
-    @Inject(method = "updateRenderState", at = @At("HEAD"))
-    private void theouterworld$swapCelestialTextures(
+    @Inject(method = "updateRenderState", at = @At("TAIL"))
+    private void theouterworld$updateOuterWorldSky(
         ClientWorld world,
         float tickDelta,
         Vec3d cameraPos,
         SkyRenderState state,
         CallbackInfo ci
     ) {
-        if (world.getRegistryKey().equals(ModDimensions.OUTER_WORLD_WORLD_KEY)) {
+        boolean inOuterWorld = world.getRegistryKey().equals(ModDimensions.OUTER_WORLD_WORLD_KEY);
+        if (inOuterWorld) {
             if (this.theouterworld$outerworldSunTexture != null) {
                 this.sunTexture = this.theouterworld$outerworldSunTexture;
             }
@@ -84,10 +97,46 @@ public abstract class SkyRenderingMixin {
             if (this.theouterworld$outerworldMoonTexture != null) {
                 this.moonPhasesTexture = this.theouterworld$outerworldMoonTexture;
             }
+
+            this.theouterworld$tintMartianSky(state);
         } else {
             this.sunTexture = this.theouterworld$vanillaSunTexture;
             this.moonPhasesTexture = this.theouterworld$vanillaMoonTexture;
         }
+    }
+
+    @Unique
+    private void theouterworld$tintMartianSky(SkyRenderState state) {
+        if (state.skyType == DimensionEffects.SkyType.NONE) {
+            return;
+        }
+
+        float solarCycle = (MathHelper.cos(state.time * (float) (Math.PI * 2)) + 1.0F) * 0.5F;
+        Vec3d martianColor = THEOUTERWORLD_NIGHT_SKY.lerp(THEOUTERWORLD_DAY_SKY, solarCycle);
+        state.skyColor = ColorHelper.fromFloats(
+            1.0F,
+            theouterworld$channel(martianColor.x),
+            theouterworld$channel(martianColor.y),
+            theouterworld$channel(martianColor.z)
+        );
+
+        float cosine = MathHelper.cos(state.time * (float) (Math.PI * 2));
+        boolean isSunriseOrSunset = cosine >= -0.4F && cosine <= 0.4F;
+        state.isSunTransition = isSunriseOrSunset;
+
+        if (isSunriseOrSunset) {
+            state.sunriseAndSunsetColor = ColorHelper.fromFloats(
+                1.0F,
+                theouterworld$channel(THEOUTERWORLD_SUNRISE.x),
+                theouterworld$channel(THEOUTERWORLD_SUNRISE.y),
+                theouterworld$channel(THEOUTERWORLD_SUNRISE.z)
+            );
+        }
+    }
+
+    @Unique
+    private static float theouterworld$channel(double value) {
+        return (float)MathHelper.clamp(value, 0.0D, 1.0D);
     }
 }
 
