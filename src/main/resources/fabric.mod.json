@@ -23,25 +23,18 @@
 		]
 	},
 	"mixins": [
+		"theouterworld.mixins.json",
 		{
 			"config": "theouterworld.client.mixins.json",
 			"environment": "client"
 		}
 	],
 	"accessWidener": "theouterworld.accesswidener",
-	"custom": {
-		"modmenu": {
-			"badges": [ "library" ]
-		}
-	},
 	"depends": {
 		"fabricloader": ">=0.17.2",
 		"minecraft": "~1.21.10",
 		"java": ">=21",
 		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
 	}
 }
 

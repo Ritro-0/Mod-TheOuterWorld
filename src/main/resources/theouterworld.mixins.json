@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "com.theouterworld.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"EntityAccessor",
+		"EntityGravityMixin",
+		"ArrowEntityGravityMixin"
+	],
+	"injectors": {
+		"defaultRequire": 0
+	}
+}
+
