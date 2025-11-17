@@ -2,16 +2,56 @@ package com.theouterworld.block;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.particle.ShriekParticleEffect;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import java.util.Optional;
 
 public class QuantumPadBlockEntity extends BlockEntity {
+    private BlockPos linkedPos = null; // Coordinates of the linked pad in the other dimension
+    
     public QuantumPadBlockEntity(BlockPos pos, BlockState state) {
         super(com.theouterworld.registry.ModBlockEntities.QUANTUM_PAD, pos, state);
+    }
+    
+    public BlockPos getLinkedPos() {
+        return linkedPos;
+    }
+    
+    public void setLinkedPos(BlockPos pos) {
+        this.linkedPos = pos;
+        this.markDirty();
+    }
+    
+    public boolean hasLinkedPos() {
+        return linkedPos != null;
+    }
+    
+    public void readNbt(NbtCompound nbt) {
+        if (nbt.contains("LinkedX") && nbt.contains("LinkedY") && nbt.contains("LinkedZ")) {
+            Optional<Integer> xOpt = nbt.getInt("LinkedX");
+            Optional<Integer> yOpt = nbt.getInt("LinkedY");
+            Optional<Integer> zOpt = nbt.getInt("LinkedZ");
+            if (xOpt.isPresent() && yOpt.isPresent() && zOpt.isPresent()) {
+                linkedPos = new BlockPos(xOpt.get(), yOpt.get(), zOpt.get());
+            } else {
+                linkedPos = null;
+            }
+        } else {
+            linkedPos = null;
+        }
+    }
+    
+    protected void writeNbt(NbtCompound nbt) {
+        if (linkedPos != null) {
+            nbt.putInt("LinkedX", linkedPos.getX());
+            nbt.putInt("LinkedY", linkedPos.getY());
+            nbt.putInt("LinkedZ", linkedPos.getZ());
+        }
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, QuantumPadBlockEntity blockEntity) {

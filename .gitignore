@@ -40,4 +40,7 @@ replay_*.log
 *.hprof
 *.jfr
 
+# decompiled minecraft classes (reference only)
+net/
+
 

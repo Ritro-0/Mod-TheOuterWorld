@@ -141,48 +141,115 @@ public class QuantumPadBlock extends BlockWithEntity {
         ServerWorld targetWorld = server.getWorld(targetDimension);
         if (targetWorld == null) return;
         
-        // Calculate teleport position
-        BlockPos teleportPos = calculateTeleportPosition(targetWorld, pos);
+        // Get the block entity to check for linked coordinates
+        BlockEntity be = world.getBlockEntity(pos);
+        QuantumPadBlockEntity padEntity = null;
+        BlockPos linkedPos = null;
         
-        // Teleport the player
-        player.teleport(targetWorld, teleportPos.getX() + 0.5, teleportPos.getY() + 1, teleportPos.getZ() + 0.5, java.util.Set.of(), 0, 0, true);
+        if (be instanceof QuantumPadBlockEntity) {
+            padEntity = (QuantumPadBlockEntity) be;
+            if (padEntity.hasLinkedPos()) {
+                linkedPos = padEntity.getLinkedPos();
+            }
+        }
         
-        // Place a quantum pad at the destination
-        placeQuantumPadAtDestination(targetWorld, teleportPos);
+        BlockPos targetPadPos = null;
+        boolean padExists = false;
+        
+        // Check if we have linked coordinates and if a pad exists there
+        if (linkedPos != null) {
+            BlockState linkedState = targetWorld.getBlockState(linkedPos);
+            if (linkedState.isOf(ModBlocks.QUANTUM_PAD)) {
+                // Pad exists at linked coordinates, use it
+                targetPadPos = linkedPos;
+                padExists = true;
+            }
+        }
+        
+        // If no linked pad exists, we need to create one
+        if (!padExists) {
+            // Calculate teleport position - match coordinates from the original pad
+            BlockPos targetPos = new BlockPos(pos.getX(), 0, pos.getZ());
+            
+            // Find the surface where the player will be
+            BlockPos playerTargetPos = targetPos;
+            BlockPos playerSurfacePos = findSurfacePosition(targetWorld, playerTargetPos);
+            
+            // Place the pad west of the player, at the same Y level as the player's surface
+            targetPadPos = new BlockPos(playerTargetPos.getX() - 1, playerSurfacePos.getY() + 1, playerTargetPos.getZ());
+            
+            // Make sure there's a solid block under the pad
+            BlockPos padBasePos = targetPadPos.down();
+            BlockState padBaseState = targetWorld.getBlockState(padBasePos);
+            if (padBaseState.isAir() || !padBaseState.isSolidBlock(targetWorld, padBasePos)) {
+                targetWorld.setBlockState(padBasePos, ModBlocks.OXIDIZED_BASALT.getDefaultState());
+            }
+            
+            // Place the pad if it doesn't exist
+            if (targetWorld.getBlockState(targetPadPos).isAir()) {
+                targetWorld.setBlockState(targetPadPos, ModBlocks.QUANTUM_PAD.getDefaultState().with(ACTIVATED, true));
+            }
+            
+            // Link both pads to each other
+            // Wait a tick for the block entity to be created if needed
+            BlockEntity targetBe = targetWorld.getBlockEntity(targetPadPos);
+            if (targetBe instanceof QuantumPadBlockEntity) {
+                QuantumPadBlockEntity targetPadEntity = (QuantumPadBlockEntity) targetBe;
+                targetPadEntity.setLinkedPos(pos); // Link target pad back to source pad
+            }
+            
+            if (padEntity != null) {
+                padEntity.setLinkedPos(targetPadPos); // Link source pad to target pad
+            }
+        }
+        
+        // Teleport the player to the pad location (east of the pad)
+        BlockPos playerTeleportPos = targetPadPos.east(); // Player goes east of the pad
+        BlockPos finalPlayerSurfacePos = findSurfacePosition(targetWorld, playerTeleportPos);
+        double playerY = finalPlayerSurfacePos.getY() + 1.0; // Player stands on the surface
+        player.teleport(targetWorld, playerTeleportPos.getX() + 0.5, playerY, playerTeleportPos.getZ() + 0.5, java.util.Set.of(), 0, 0, true);
     }
     
-    private BlockPos calculateTeleportPosition(ServerWorld targetWorld, BlockPos originalPos) {
-        BlockPos surfacePos = targetWorld.getTopPosition(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, originalPos);
-        if (surfacePos.getY() <= targetWorld.getBottomY()) {
-            surfacePos = new BlockPos(originalPos.getX(), targetWorld.getBottomY() + 1, originalPos.getZ());
+    private BlockPos findSurfacePosition(ServerWorld targetWorld, BlockPos originalPos) {
+        // Scan from top to bottom to find the first solid block with air above it
+        // This is more reliable than using heightmaps which can be wrong
+        int topY = targetWorld.getBottomY() + 255; // Start from near the top of the world
+        int bottomY = targetWorld.getBottomY();
+        
+        // Scan downward to find the actual surface (topmost solid block with air above)
+        for (int y = topY; y >= bottomY; y--) {
+            BlockPos checkPos = new BlockPos(originalPos.getX(), y, originalPos.getZ());
+            BlockState state = targetWorld.getBlockState(checkPos);
+            BlockState stateAbove = targetWorld.getBlockState(checkPos.up());
+            
+            // Found a solid block with air above it - this is the surface!
+            if (!state.isAir() && state.isSolidBlock(targetWorld, checkPos) && stateAbove.isAir()) {
+                return checkPos;
+            }
         }
-        return surfacePos;
+        
+        // If we didn't find a surface (shouldn't happen in normal worlds), use a safe fallback
+        return new BlockPos(originalPos.getX(), targetWorld.getBottomY() + 64, originalPos.getZ());
     }
     
-    private void placeQuantumPadAtDestination(ServerWorld world, BlockPos pos) {
-        BlockPos padPos = pos;
-        if (!world.getBlockState(padPos).isAir()) {
-            padPos = padPos.up();
-        }
-
-        ensureSolidBase(world, padPos);
-        placePadIfAir(world, padPos);
-
-        BlockPos adjacentPadPos = padPos.east();
-        ensureSolidBase(world, adjacentPadPos);
-        placePadIfAir(world, adjacentPadPos);
+    private BlockPos placeQuantumPadAtDestination(ServerWorld world, BlockPos surfacePos) {
+        // surfacePos is the topmost solid block (verified to have air above by findSurfacePosition)
+        // Place the pad ON TOP of the surface (exactly 1 block above the solid block)
+        BlockPos padPos = surfacePos.up();
+        
+        // Simply place the pad - findSurfacePosition already verified the surface is solid with air above
+        world.setBlockState(padPos, ModBlocks.QUANTUM_PAD.getDefaultState().with(ACTIVATED, true));
+        
+        return padPos;
     }
 
     private void ensureSolidBase(ServerWorld world, BlockPos pos) {
         BlockPos basePos = pos.down();
-        if (world.getBlockState(basePos).isAir()) {
+        BlockState baseState = world.getBlockState(basePos);
+        
+        // If the base is air or a non-solid block, place a solid block
+        if (baseState.isAir() || !baseState.isSolidBlock(world, basePos)) {
             world.setBlockState(basePos, ModBlocks.OXIDIZED_BASALT.getDefaultState());
-        }
-    }
-
-    private void placePadIfAir(ServerWorld world, BlockPos pos) {
-        if (world.getBlockState(pos).isAir()) {
-            world.setBlockState(pos, ModBlocks.QUANTUM_PAD.getDefaultState().with(ACTIVATED, true));
         }
     }
 
