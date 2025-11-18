@@ -141,6 +141,11 @@ public class QuantumPadBlock extends BlockWithEntity {
         ServerWorld targetWorld = server.getWorld(targetDimension);
         if (targetWorld == null) return;
         
+        // Get player's current position (preserve X and Z coordinates)
+        Vec3d playerPos = new Vec3d(player.getX(), player.getY(), player.getZ());
+        int playerX = (int) Math.floor(playerPos.x);
+        int playerZ = (int) Math.floor(playerPos.z);
+        
         // Get the block entity to check for linked coordinates
         BlockEntity be = world.getBlockEntity(pos);
         QuantumPadBlockEntity padEntity = null;
@@ -168,15 +173,12 @@ public class QuantumPadBlock extends BlockWithEntity {
         
         // If no linked pad exists, we need to create one
         if (!padExists) {
-            // Calculate teleport position - match coordinates from the original pad
-            BlockPos targetPos = new BlockPos(pos.getX(), 0, pos.getZ());
+            // Place pad at same X/Z coordinates as source pad, but at target dimension's surface Y level
+            BlockPos padTargetPos = new BlockPos(pos.getX(), 0, pos.getZ());
+            BlockPos padSurfacePos = findSurfacePosition(targetWorld, padTargetPos);
             
-            // Find the surface where the player will be
-            BlockPos playerTargetPos = targetPos;
-            BlockPos playerSurfacePos = findSurfacePosition(targetWorld, playerTargetPos);
-            
-            // Place the pad west of the player, at the same Y level as the player's surface
-            targetPadPos = new BlockPos(playerTargetPos.getX() - 1, playerSurfacePos.getY() + 1, playerTargetPos.getZ());
+            // Place pad on top of the surface
+            targetPadPos = padSurfacePos.up();
             
             // Make sure there's a solid block under the pad
             BlockPos padBasePos = targetPadPos.down();
@@ -203,11 +205,11 @@ public class QuantumPadBlock extends BlockWithEntity {
             }
         }
         
-        // Teleport the player to the pad location (east of the pad)
-        BlockPos playerTeleportPos = targetPadPos.east(); // Player goes east of the pad
-        BlockPos finalPlayerSurfacePos = findSurfacePosition(targetWorld, playerTeleportPos);
-        double playerY = finalPlayerSurfacePos.getY() + 1.0; // Player stands on the surface
-        player.teleport(targetWorld, playerTeleportPos.getX() + 0.5, playerY, playerTeleportPos.getZ() + 0.5, java.util.Set.of(), 0, 0, true);
+        // Teleport player to same X/Z coordinates they were at, but at target dimension's surface Y level
+        BlockPos playerTargetPos = new BlockPos(playerX, 0, playerZ);
+        BlockPos playerSurfacePos = findSurfacePosition(targetWorld, playerTargetPos);
+        double playerY = playerSurfacePos.getY() + 1.0; // Player stands on the surface
+        player.teleport(targetWorld, playerX + 0.5, playerY, playerZ + 0.5, java.util.Set.of(), 0, 0, true);
     }
     
     private BlockPos findSurfacePosition(ServerWorld targetWorld, BlockPos originalPos) {

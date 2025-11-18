@@ -5,7 +5,10 @@
 	"mixins": [
 		"EntityAccessor",
 		"EntityGravityMixin",
-		"ArrowEntityGravityMixin"
+		"ArrowEntityGravityMixin",
+		"OuterworldSpawnBlockerMixin",
+		"OuterworldWeatherBlockerMixin",
+		"FlatChunkGeneratorMixin"
 	],
 	"injectors": {
 		"defaultRequire": 0
