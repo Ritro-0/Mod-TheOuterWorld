@@ -106,7 +106,8 @@ public class DustStormVisualEffects {
             int height = client.getWindow().getScaledHeight();
             
             // Layer 1: Color fill (brown/orange tint) - blends underneath
-            int tintAlpha = (int) (intensity * 180f); // Max 180/255 opacity
+            // Reduced max alpha for more transparency (120/255 = ~47% max opacity)
+            int tintAlpha = (int) (intensity * 120f); // 0-120 for reduced opacity (adjust 120 to change transparency)
             int tintColor = (tintAlpha << 24) | 0xD2691E; // Brown/orange tint (RGB: 210, 105, 30)
             drawContext.fill(0, 0, width, height, tintColor);
             
