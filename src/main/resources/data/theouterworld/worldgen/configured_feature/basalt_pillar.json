@@ -1,0 +1,10 @@
+{
+  "type": "theouterworld:basalt_pillar",
+  "config": {
+    "minHeight": 12,
+    "maxHeight": 30,
+    "minWidth": 2,
+    "maxWidth": 5
+  }
+}
+

@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "theouterworld",
+	"version": "${version}",
+	"name": "The Outer World",
+	"description": "Foundations for The Outer World mod.",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://example.com/TheOuterWorld"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/theouterworld/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.theouterworld.OuterWorldMod"
+		],
+		"client": [
+			"com.theouterworld.OuterWorldClient"
+		]
+	},
+	"mixins": [
+		"theouterworld.mixins.json",
+		{
+			"config": "theouterworld.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"accessWidener": "theouterworld.accesswidener",
+	"depends": {
+		"fabricloader": ">=0.17.2",
+		"minecraft": "~1.21.10",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
+

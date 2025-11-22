@@ -1,0 +1,18 @@
+{
+	"required": true,
+	"package": "com.theouterworld.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"EntityAccessor",
+		"EntityGravityMixin",
+		"ArrowEntityGravityMixin",
+		"LivingEntityElytraFrictionMixin",
+		"OuterworldSpawnBlockerMixin",
+		"OuterworldWeatherBlockerMixin",
+		"ArmorSlotGlassMixin"
+	],
+	"injectors": {
+		"defaultRequire": 0
+	}
+}
+

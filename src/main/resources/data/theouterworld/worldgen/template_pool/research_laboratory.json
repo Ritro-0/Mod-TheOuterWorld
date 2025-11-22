@@ -1,0 +1,18 @@
+{
+  "name": "theouterworld:research_laboratory",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "theouterworld:research_laboratory",
+        "processors": "theouterworld:copper_oxidization",
+        "override_liquid_settings": "ignore_waterlogging"
+      }
+    }
+  ]
+}
+
+
