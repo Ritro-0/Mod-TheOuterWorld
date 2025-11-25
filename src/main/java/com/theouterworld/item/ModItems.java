@@ -17,6 +17,39 @@ public class ModItems {
 		)
 	);
 
+	public static final Item BROKEN_EMERGENCY_RETURN_PAD = registerItem(
+		"broken_emergency_return_pad",
+		key -> new BrokenEmergencyReturnPadItem(
+			new Item.Settings()
+				.registryKey(key)
+		)
+	);
+
+	public static final Item OXIDIZED_BASALT_PEBBLE = registerItem(
+		"oxidized_basalt_pebble",
+		key -> new Item(
+			new Item.Settings()
+				.registryKey(key)
+		)
+	);
+
+	public static final Item OXIDIZED_BASALT_ROCK = registerItem(
+		"oxidized_basalt_rock",
+		key -> new Item(
+			new Item.Settings()
+				.registryKey(key)
+		)
+	);
+
+	public static final Item OXIDIZED_BASALT_PICK = registerItem(
+		"oxidized_basalt_pick",
+		key -> new OxidizedBasaltPickItem(
+			key,
+			new Item.Settings()
+				.registryKey(key)
+		)
+	);
+
 	private static Item registerItem(String name, java.util.function.Function<RegistryKey<Item>, Item> factory) {
 		Identifier id = Identifier.of(OuterWorldMod.MOD_ID, name);
 		RegistryKey<Item> key = RegistryKey.of(Registries.ITEM.getKey(), id);

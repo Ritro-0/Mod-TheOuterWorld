@@ -1,6 +1,7 @@
 package com.theouterworld.item;
 
 import com.theouterworld.registry.ModDimensions;
+import com.theouterworld.item.ModItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -45,7 +46,8 @@ public class EmergencyReturnPadItem extends Item {
 			return ActionResult.PASS;
 		}
 
-		// Target origin in overworld
+		// TODO: Add logic to first try player's spawnpoint (bed/respawn anchor/etc.) before falling back to 0,0
+		// This should mirror how Minecraft handles end portal teleportation
 		BlockPos origin = new BlockPos(0, 0, 0);
 		BlockPos target = findNearestSafeSurface(overworld, origin, 128);
 		if (target == null) {
@@ -55,8 +57,9 @@ public class EmergencyReturnPadItem extends Item {
 
 		player.teleport(overworld, target.getX() + 0.5, target.getY(), target.getZ() + 0.5, java.util.Set.of(), player.getYaw(), player.getPitch(), true);
 
-		// One-time use
-		stack.decrement(1);
+		// Replace with broken emergency return pad instead of consuming
+		ItemStack brokenPad = new ItemStack(ModItems.BROKEN_EMERGENCY_RETURN_PAD);
+		player.setStackInHand(hand, brokenPad);
 		return ActionResult.SUCCESS;
 	}
 

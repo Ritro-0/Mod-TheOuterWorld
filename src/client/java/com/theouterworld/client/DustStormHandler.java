@@ -17,6 +17,14 @@ public class DustStormHandler {
     // Layer 2: Intermediate sphere (fills gaps when player moves)
     // Layer 3: Dense personal fog (blinding effect around player)
     
+    // Tick counters for spacing distant layers
+    private static int distantLayerTickCounter = 0;
+    private static int intermediateLayerTickCounter = 0;
+    
+    // Tick spacing: distant layers spawn every 3 ticks, intermediate every 2 ticks
+    private static final int DISTANT_LAYER_TICK_INTERVAL = 3;
+    private static final int INTERMEDIATE_LAYER_TICK_INTERVAL = 2;
+    
     public static void register() {
         ClientTickEvents.END_WORLD_TICK.register(DustStormHandler::onWorldTick);
     }
@@ -37,23 +45,63 @@ public class DustStormHandler {
             return;
         }
         
+        // Get particle setting multiplier
+        float particleMultiplier = getParticleMultiplier(client);
+        
         Random random = world.getRandom();
         Vec3d eyePos = client.player.getEyePos();
         
-        // Big distant wall of dust (the approaching storm)
-        for (int i = 0; i < 22; i++) {
-            spawnParticle(world, eyePos, 55.0, random, false);
+        // Increment tick counters
+        distantLayerTickCounter++;
+        intermediateLayerTickCounter++;
+        
+        // Big distant wall of dust (the approaching storm) - spawn every 3 ticks
+        if (distantLayerTickCounter >= DISTANT_LAYER_TICK_INTERVAL) {
+            distantLayerTickCounter = 0;
+            int particleCount = (int) (22 * particleMultiplier);
+            for (int i = 0; i < particleCount; i++) {
+                spawnParticle(world, eyePos, 55.0, random, false);
+            }
         }
         
-        // Intermediate sphere - fills gaps when player moves around
-        for (int i = 0; i < 28; i++) {
-            spawnParticle(world, eyePos, 18.0, random, false);
+        // Intermediate sphere - fills gaps when player moves around - spawn every 2 ticks
+        if (intermediateLayerTickCounter >= INTERMEDIATE_LAYER_TICK_INTERVAL) {
+            intermediateLayerTickCounter = 0;
+            int particleCount = (int) (28 * particleMultiplier);
+            for (int i = 0; i < particleCount; i++) {
+                spawnParticle(world, eyePos, 18.0, random, false);
+            }
         }
         
-        // Dense cloud around the player's head (blinds you)
-        for (int i = 0; i < 38; i++) {
+        // Dense cloud around the player's head (blinds you) - spawn every tick (most important for visibility)
+        int particleCount = (int) (38 * particleMultiplier);
+        for (int i = 0; i < particleCount; i++) {
             spawnParticle(world, eyePos, 5.5, random, true);
         }
+    }
+    
+    /**
+     * Gets the particle multiplier based on player's particle settings.
+     * @param client The Minecraft client instance
+     * @return Multiplier: 1.0 for ALL, 0.5 for DECREASED, 0.2 for MINIMAL
+     */
+    private static float getParticleMultiplier(MinecraftClient client) {
+        // Access particle setting via options - use toString() to get the enum name
+        // This works regardless of the actual enum class name
+        Object particleValue = client.options.getParticles().getValue();
+        String particleName = particleValue.toString();
+        
+        // Match against known particle setting names (case-insensitive)
+        if (particleName.equalsIgnoreCase("ALL") || particleName.contains("ALL")) {
+            return 1.0f;
+        } else if (particleName.equalsIgnoreCase("DECREASED") || particleName.contains("DECREASED")) {
+            return 0.5f;
+        } else if (particleName.equalsIgnoreCase("MINIMAL") || particleName.contains("MINIMAL")) {
+            return 0.2f;
+        }
+        
+        // Default to full particles if we can't determine the setting
+        return 1.0f;
     }
     
     private static void spawnParticle(ClientWorld world, Vec3d center, double radius, Random random, boolean dense) {

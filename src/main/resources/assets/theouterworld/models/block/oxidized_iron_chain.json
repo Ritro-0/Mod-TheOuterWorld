@@ -1,0 +1,72 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "theouterworld:block/oxidized_iron_chain",
+    "all": "theouterworld:block/oxidized_iron_chain"
+  },
+  "elements": [
+    {
+      "from": [6.5, 0, 8],
+      "to": [9.5, 1, 8],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [0, 14, 3, 15], "texture": "#all"},
+        "south": {"uv": [0, 14, 3, 15], "texture": "#all"}
+      }
+    },
+    {
+      "from": [8, 1, 6.5],
+      "to": [8, 6, 9.5],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "east": {"uv": [0, 9, 3, 14], "texture": "#all"},
+        "west": {"uv": [0, 9, 3, 14], "texture": "#all"}
+      }
+    },
+    {
+      "from": [6.5, 6, 8],
+      "to": [9.5, 7, 8],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [0, 8, 3, 9], "texture": "#all"},
+        "south": {"uv": [0, 8, 3, 9], "texture": "#all"}
+      }
+    },
+    {
+      "from": [8, 5, 6.5],
+      "to": [8, 10, 9.5],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "east": {"uv": [3, 6, 6, 11], "texture": "#all"},
+        "west": {"uv": [3, 6, 6, 11], "texture": "#all"}
+      }
+    },
+    {
+      "from": [6.5, 9, 8],
+      "to": [9.5, 10, 8],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [0, 5, 3, 6], "texture": "#all"},
+        "south": {"uv": [0, 5, 3, 6], "texture": "#all"}
+      }
+    },
+    {
+      "from": [8, 10, 6.5],
+      "to": [8, 15, 9.5],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "east": {"uv": [0, 0, 3, 5], "texture": "#all"},
+        "west": {"uv": [0, 0, 3, 5], "texture": "#all"}
+      }
+    },
+    {
+      "from": [6.5, 15, 8],
+      "to": [9.5, 16, 8],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [3, 5, 6, 6], "texture": "#all"},
+        "south": {"uv": [3, 5, 6, 6], "texture": "#all"}
+      }
+    }
+  ]
+}

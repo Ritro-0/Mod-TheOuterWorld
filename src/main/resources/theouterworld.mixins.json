@@ -7,7 +7,6 @@
 		"EntityGravityMixin",
 		"ArrowEntityGravityMixin",
 		"LivingEntityElytraFrictionMixin",
-		"OuterworldSpawnBlockerMixin",
 		"OuterworldWeatherBlockerMixin",
 		"ArmorSlotGlassMixin"
 	],

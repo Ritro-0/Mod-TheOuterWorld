@@ -7,3 +7,4 @@ public class ModParticles {
         OuterWorldMod.LOGGER.info("Registering particles for " + OuterWorldMod.MOD_ID);
     }
 }
+

@@ -64,3 +64,4 @@ public class OuterworldConfig {
         return INSTANCE;
     }
 }
+

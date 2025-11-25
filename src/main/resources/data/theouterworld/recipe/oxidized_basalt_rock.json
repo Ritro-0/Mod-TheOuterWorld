@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PP",
+    "PP"
+  ],
+  "key": {
+    "P": "theouterworld:oxidized_basalt_pebble"
+  },
+  "result": {
+    "id": "theouterworld:oxidized_basalt_rock",
+    "count": 1
+  }
+}
+

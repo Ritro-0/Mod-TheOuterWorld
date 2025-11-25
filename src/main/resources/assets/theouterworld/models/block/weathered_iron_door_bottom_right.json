@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/door_bottom_right",
+  "textures": {
+    "bottom": "theouterworld:block/weathered_iron_door_bottom",
+    "top": "theouterworld:block/weathered_iron_door_top"
+  }
+}
+

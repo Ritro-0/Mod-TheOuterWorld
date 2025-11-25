@@ -19,9 +19,58 @@ public class ModItemGroups {
             .displayName(Text.translatable("itemgroup.theouterworld"))
             .entries((displayContext, entries) -> {
                 entries.add(ModItems.EMERGENCY_RETURN_PAD);
+                entries.add(ModItems.BROKEN_EMERGENCY_RETURN_PAD);
                 entries.add(ModBlocks.QUANTUM_PAD);
                 entries.add(ModBlocks.REGOLITH);
                 entries.add(ModBlocks.OXIDIZED_BASALT);
+                entries.add(ModBlocks.EXPOSED_IRON);
+                entries.add(ModBlocks.WEATHERED_IRON);
+                entries.add(ModBlocks.OXIDIZED_IRON);
+                entries.add(ModBlocks.WAXED_EXPOSED_IRON);
+                entries.add(ModBlocks.WAXED_WEATHERED_IRON);
+                entries.add(ModBlocks.WAXED_OXIDIZED_IRON);
+                entries.add(ModBlocks.IRON_BULB);
+                entries.add(ModBlocks.EXPOSED_IRON_BULB);
+                entries.add(ModBlocks.WEATHERED_IRON_BULB);
+                entries.add(ModBlocks.OXIDIZED_IRON_BULB);
+                entries.add(ModBlocks.WAXED_IRON_BULB);
+                entries.add(ModBlocks.WAXED_EXPOSED_IRON_BULB);
+                entries.add(ModBlocks.WAXED_WEATHERED_IRON_BULB);
+                entries.add(ModBlocks.WAXED_OXIDIZED_IRON_BULB);
+                entries.add(ModBlocks.EXPOSED_IRON_CHAIN);
+                entries.add(ModBlocks.WEATHERED_IRON_CHAIN);
+                entries.add(ModBlocks.OXIDIZED_IRON_CHAIN);
+                entries.add(ModBlocks.WAXED_EXPOSED_IRON_CHAIN);
+                entries.add(ModBlocks.WAXED_WEATHERED_IRON_CHAIN);
+                entries.add(ModBlocks.WAXED_OXIDIZED_IRON_CHAIN);
+                entries.add(ModBlocks.EXPOSED_IRON_DOOR);
+                entries.add(ModBlocks.WEATHERED_IRON_DOOR);
+                entries.add(ModBlocks.OXIDIZED_IRON_DOOR);
+                entries.add(ModBlocks.WAXED_EXPOSED_IRON_DOOR);
+                entries.add(ModBlocks.WAXED_WEATHERED_IRON_DOOR);
+                entries.add(ModBlocks.WAXED_OXIDIZED_IRON_DOOR);
+                entries.add(ModBlocks.EXPOSED_IRON_TRAPDOOR);
+                entries.add(ModBlocks.WEATHERED_IRON_TRAPDOOR);
+                entries.add(ModBlocks.OXIDIZED_IRON_TRAPDOOR);
+                entries.add(ModBlocks.WAXED_EXPOSED_IRON_TRAPDOOR);
+                entries.add(ModBlocks.WAXED_WEATHERED_IRON_TRAPDOOR);
+                entries.add(ModBlocks.WAXED_OXIDIZED_IRON_TRAPDOOR);
+                entries.add(ModBlocks.IRON_GRATE);
+                entries.add(ModBlocks.EXPOSED_IRON_GRATE);
+                entries.add(ModBlocks.WEATHERED_IRON_GRATE);
+                entries.add(ModBlocks.OXIDIZED_IRON_GRATE);
+                entries.add(ModBlocks.WAXED_IRON_GRATE);
+                entries.add(ModBlocks.WAXED_EXPOSED_IRON_GRATE);
+                entries.add(ModBlocks.WAXED_WEATHERED_IRON_GRATE);
+                entries.add(ModBlocks.WAXED_OXIDIZED_IRON_GRATE);
+                entries.add(ModBlocks.ANORTHOSITE);
+                entries.add(ModBlocks.ANORTHOSITE_COPPER_ORE);
+                entries.add(ModBlocks.ANORTHOSITE_GOLD_ORE);
+                entries.add(ModBlocks.ANORTHOSITE_OXIDIZED_IRON_ORE);
+                entries.add(ModBlocks.ANORTHOSITE_REDSTONE_ORE);
+                entries.add(ModItems.OXIDIZED_BASALT_PEBBLE);
+                entries.add(ModItems.OXIDIZED_BASALT_ROCK);
+                entries.add(ModItems.OXIDIZED_BASALT_PICK);
             })
             .build());
 

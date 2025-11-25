@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "theouterworld:block/iron_bulb_lit"
+  }
+}
+

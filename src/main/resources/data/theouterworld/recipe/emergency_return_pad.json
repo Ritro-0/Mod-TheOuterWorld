@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NNN",
+    "NBN",
+    "NNN"
+  ],
+  "key": {
+    "N": "minecraft:copper_nugget",
+    "B": "theouterworld:broken_emergency_return_pad"
+  },
+  "result": {
+    "id": "theouterworld:emergency_return_pad",
+    "count": 1
+  }
+}
+
