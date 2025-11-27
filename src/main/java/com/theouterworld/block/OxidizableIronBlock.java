@@ -3,6 +3,7 @@ package com.theouterworld.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -16,25 +17,15 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
+import java.util.Optional;
+
 public class OxidizableIronBlock extends Block implements Oxidizable {
     private final Oxidizable.OxidationLevel degradationLevel;
-    private Block nextOxidizedBlock;
-    private Block previousOxidizedBlock;
     private Block waxedVersion;
 
-    public OxidizableIronBlock(Oxidizable.OxidationLevel degradationLevel, Block nextOxidizedBlock, Block previousOxidizedBlock, Settings settings) {
+    public OxidizableIronBlock(Oxidizable.OxidationLevel degradationLevel, Settings settings) {
         super(settings);
         this.degradationLevel = degradationLevel;
-        this.nextOxidizedBlock = nextOxidizedBlock;
-        this.previousOxidizedBlock = previousOxidizedBlock;
-    }
-
-    public void setNextOxidizedBlock(Block nextOxidizedBlock) {
-        this.nextOxidizedBlock = nextOxidizedBlock;
-    }
-
-    public void setPreviousOxidizedBlock(Block previousOxidizedBlock) {
-        this.previousOxidizedBlock = previousOxidizedBlock;
     }
 
     public void setWaxedVersion(Block waxedVersion) {
@@ -42,42 +33,29 @@ public class OxidizableIronBlock extends Block implements Oxidizable {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        this.tickDegradation(state, world, pos, random);
+    protected void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        // Only oxidize in Outerworld dimension
+        if (OxidizableIronBehavior.shouldOxidize(world, pos)) {
+            this.doOxidation(state, world, pos, random);
+        }
+    }
+
+    private void doOxidation(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        // Get the next oxidation stage
+        Optional<BlockState> nextState = this.getDegradationResult(state);
+        if (nextState.isPresent()) {
+            // Base oxidation chance (~5.6% like vanilla copper)
+            float chance = OxidizableIronBehavior.getOxidationChance(this.degradationLevel, 0);
+            if (random.nextFloat() < chance) {
+                world.setBlockState(pos, nextState.get());
+            }
+        }
     }
 
     @Override
     public boolean hasRandomTicks(BlockState state) {
-        return OxidizableIronBehavior.getNextOxidationDelay(this.getDegradationLevel()) < Integer.MAX_VALUE;
-    }
-
-    protected void tickDegradation(BlockState state, World world, BlockPos pos, Random random) {
-        // Only oxidize in Outerworld dimension
-        if (!(world instanceof ServerWorld serverWorld) || !OxidizableIronBehavior.shouldOxidize(serverWorld, pos)) {
-            return;
-        }
-
-        if (this.getDegradationLevel() == Oxidizable.OxidationLevel.OXIDIZED) {
-            return; // Can't oxidize further
-        }
-
-        if (nextOxidizedBlock == null) {
-            return; // No next stage
-        }
-
-        // Count nearby unwaxed oxidizable iron blocks at higher oxidation levels
-        Oxidizable.OxidationLevel nextLevel = this.getNextDegradationLevel();
-        int higherNeighborCount = OxidizableIronBehavior.countNearbyUnwaxedOxidizableIron(world, pos, nextLevel);
-
-        // Calculate oxidation chance
-        float chance = OxidizableIronBehavior.getOxidationChance(this.degradationLevel, higherNeighborCount);
-
-        if (random.nextFloat() < chance) {
-            // Oxidize to next stage
-            world.setBlockState(pos, nextOxidizedBlock.getDefaultState());
-            world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(state));
-            world.playSound(null, pos, SoundEvents.BLOCK_COPPER_BULB_TURN_OFF, SoundCategory.BLOCKS, 0.5f, 1.0f);
-        }
+        // Use Fabric API to check if there's a next oxidation stage
+        return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
     }
 
     @Override
@@ -85,38 +63,20 @@ public class OxidizableIronBlock extends Block implements Oxidizable {
         return this.degradationLevel;
     }
 
-    public Oxidizable.OxidationLevel getNextDegradationLevel() {
-        return switch (this.degradationLevel) {
-            case UNAFFECTED -> Oxidizable.OxidationLevel.EXPOSED;
-            case EXPOSED -> Oxidizable.OxidationLevel.WEATHERED;
-            case WEATHERED -> Oxidizable.OxidationLevel.OXIDIZED;
-            case OXIDIZED -> Oxidizable.OxidationLevel.OXIDIZED;
-        };
+    @Override
+    public Optional<BlockState> getDegradationResult(BlockState state) {
+        // This returns the NEXT oxidation stage (more oxidized)
+        return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).map(block -> block.getStateWithProperties(state));
     }
 
     @Override
-    public java.util.Optional<BlockState> getDegradationResult(BlockState state) {
-        if (previousOxidizedBlock != null) {
-            return java.util.Optional.of(previousOxidizedBlock.getDefaultState());
-        }
-        return java.util.Optional.empty();
-    }
-
-    public Block getNextOxidizedBlock() {
-        return nextOxidizedBlock;
-    }
-
-    public Block getPreviousOxidizedBlock() {
-        return previousOxidizedBlock;
-    }
-
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, net.minecraft.entity.player.PlayerEntity player, net.minecraft.util.Hand hand, BlockHitResult hit) {
-        ItemStack stack = player.getStackInHand(hand);
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        ItemStack stack = player.getStackInHand(player.getActiveHand());
         
         // Right-click with honeycomb to wax (prevent oxidation)
         if (stack.isOf(Items.HONEYCOMB) && waxedVersion != null) {
-            if (world instanceof ServerWorld serverWorld) {
-                world.setBlockState(pos, waxedVersion.getDefaultState());
+            if (!world.isClient()) {
+                world.setBlockState(pos, waxedVersion.getStateWithProperties(state));
                 world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(state));
                 world.playSound(null, pos, SoundEvents.ITEM_HONEYCOMB_WAX_ON, SoundCategory.BLOCKS, 1.0f, 1.0f);
                 
@@ -124,30 +84,29 @@ public class OxidizableIronBlock extends Block implements Oxidizable {
                 if (!player.isCreative()) {
                     stack.decrement(1);
                 }
-                
-                return ActionResult.SUCCESS;
             }
             return ActionResult.SUCCESS;
         }
         
         // Right-click with axe to de-oxidize one stage (scrape)
         if (stack.getItem() instanceof AxeItem) {
-            if (world instanceof ServerWorld serverWorld && previousOxidizedBlock != null) {
-                world.setBlockState(pos, previousOxidizedBlock.getDefaultState());
-                world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(state));
-                world.playSound(null, pos, SoundEvents.ITEM_AXE_SCRAPE, SoundCategory.BLOCKS, 1.0f, 1.0f);
-                
-                // Damage the axe
-                if (!player.isCreative()) {
-                    stack.damage(1, player, hand);
+            // Get the previous (less oxidized) stage
+            Optional<Block> previousBlock = Oxidizable.getDecreasedOxidationBlock(state.getBlock());
+            if (previousBlock.isPresent()) {
+                if (!world.isClient()) {
+                    world.setBlockState(pos, previousBlock.get().getStateWithProperties(state));
+                    world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(state));
+                    world.playSound(null, pos, SoundEvents.ITEM_AXE_SCRAPE, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                    
+                    // Damage the axe
+                    if (!player.isCreative()) {
+                        stack.damage(1, player, player.getActiveHand());
+                    }
                 }
-                
                 return ActionResult.SUCCESS;
             }
-            return ActionResult.SUCCESS;
         }
         
         return ActionResult.PASS;
     }
 }
-

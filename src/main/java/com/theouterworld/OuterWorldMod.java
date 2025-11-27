@@ -3,12 +3,14 @@ package com.theouterworld;
 import com.theouterworld.block.ModBlocks;
 import com.theouterworld.command.DustStormCommand;
 import com.theouterworld.config.OuterworldConfig;
+import com.theouterworld.event.VanillaIronReplacementListener;
 import com.theouterworld.item.ModItemGroups;
 import com.theouterworld.item.ModItems;
 import com.theouterworld.network.DustStormSyncPacket;
 import com.theouterworld.particle.ModParticles;
 import com.theouterworld.registry.ModBlockEntities;
 import com.theouterworld.registry.ModDimensions;
+import com.theouterworld.registry.ModEntities;
 import com.theouterworld.registry.ModFeatures;
 import com.theouterworld.weather.DustStormTicker;
 import net.fabricmc.api.ModInitializer;
@@ -39,6 +41,7 @@ public class OuterWorldMod implements ModInitializer {
 		ModParticles.registerModParticles();
 		ModDimensions.registerModDimensions();
 		ModFeatures.registerModFeatures();
+		ModEntities.registerModEntities();
 		
 		// Register packet types (register once on common/server side)
 		PayloadTypeRegistry.playS2C().register(DustStormSyncPacket.ID, DustStormSyncPacket.CODEC);
@@ -49,6 +52,9 @@ public class OuterWorldMod implements ModInitializer {
 		
 		// Register dust storm effects (slowness, mining fatigue)
 		com.theouterworld.weather.DustStormEffects.register();
+		
+		// Register vanilla iron replacement listener (for Outerworld oxidation)
+		VanillaIronReplacementListener.register();
 		
 		// Sync dust storm state when player joins
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {

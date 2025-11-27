@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "facing=north,waterlogged=false": { "model": "theouterworld:block/weathered_iron_golem_statue" },
+    "facing=south,waterlogged=false": { "model": "theouterworld:block/weathered_iron_golem_statue", "y": 180 },
+    "facing=east,waterlogged=false": { "model": "theouterworld:block/weathered_iron_golem_statue", "y": 90 },
+    "facing=west,waterlogged=false": { "model": "theouterworld:block/weathered_iron_golem_statue", "y": 270 },
+    "facing=north,waterlogged=true": { "model": "theouterworld:block/weathered_iron_golem_statue" },
+    "facing=south,waterlogged=true": { "model": "theouterworld:block/weathered_iron_golem_statue", "y": 180 },
+    "facing=east,waterlogged=true": { "model": "theouterworld:block/weathered_iron_golem_statue", "y": 90 },
+    "facing=west,waterlogged=true": { "model": "theouterworld:block/weathered_iron_golem_statue", "y": 270 }
+  }
+}
+

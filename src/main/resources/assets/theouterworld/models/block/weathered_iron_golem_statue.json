@@ -1,0 +1,7 @@
+{
+  "parent": "theouterworld:block/iron_golem_statue",
+  "textures": {
+    "0": "theouterworld:block/weathered_iron_golem_statue",
+    "particle": "theouterworld:block/weathered_iron"
+  }
+}

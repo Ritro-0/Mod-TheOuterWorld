@@ -3,10 +3,13 @@ package com.theouterworld;
 import com.theouterworld.block.ModBlocks;
 import com.theouterworld.client.DustStormHandler;
 import com.theouterworld.client.GlassHelmetOverlay;
+import com.theouterworld.client.OxidizableIronGolemEntityRenderer;
 import com.theouterworld.network.DustStormSyncPacket;
+import com.theouterworld.registry.ModEntities;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.render.BlockRenderLayer;
 
 public class OuterWorldClient implements ClientModInitializer {
@@ -35,32 +38,50 @@ public class OuterWorldClient implements ClientModInitializer {
 		
 		// Register transparent blocks for cutout render layer
 		registerTransparentBlocks();
+		
+		// Register entity renderers
+		registerEntityRenderers();
+		
+		// Note: The iron golem statue block entity renderer requires the new 1.21+ 
+		// BlockEntityRenderState API which has complex type requirements.
+		// The statues will render as invisible blocks until this is resolved.
+		// The statue mechanics (oxidation, waxing, reanimation) all work.
+	}
+	
+	private void registerEntityRenderers() {
+		EntityRendererRegistry.register(ModEntities.OXIDIZABLE_IRON_GOLEM, OxidizableIronGolemEntityRenderer::new);
 	}
 	
 	private void registerTransparentBlocks() {
-		// Iron chains
+		// Iron chains (including unaffected clone)
+		BlockRenderLayerMap.putBlock(ModBlocks.UNAFFECTED_IRON_CHAIN, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.EXPOSED_IRON_CHAIN, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.WEATHERED_IRON_CHAIN, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.OXIDIZED_IRON_CHAIN, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.WAXED_EXPOSED_IRON_CHAIN, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.WAXED_WEATHERED_IRON_CHAIN, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.WAXED_OXIDIZED_IRON_CHAIN, BlockRenderLayer.CUTOUT);
+		BlockRenderLayerMap.putBlock(ModBlocks.WAXED_IRON_CHAIN, BlockRenderLayer.CUTOUT);
 		
-		// Iron doors
+		// Iron doors (including unaffected clone and waxed vanilla)
+		BlockRenderLayerMap.putBlock(ModBlocks.UNAFFECTED_IRON_DOOR, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.EXPOSED_IRON_DOOR, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.WEATHERED_IRON_DOOR, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.OXIDIZED_IRON_DOOR, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.WAXED_EXPOSED_IRON_DOOR, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.WAXED_WEATHERED_IRON_DOOR, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.WAXED_OXIDIZED_IRON_DOOR, BlockRenderLayer.CUTOUT);
+		BlockRenderLayerMap.putBlock(ModBlocks.WAXED_IRON_DOOR, BlockRenderLayer.CUTOUT);
 		
-		// Iron trapdoors
+		// Iron trapdoors (including unaffected clone and waxed vanilla)
+		BlockRenderLayerMap.putBlock(ModBlocks.UNAFFECTED_IRON_TRAPDOOR, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.EXPOSED_IRON_TRAPDOOR, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.WEATHERED_IRON_TRAPDOOR, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.OXIDIZED_IRON_TRAPDOOR, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.WAXED_EXPOSED_IRON_TRAPDOOR, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.WAXED_WEATHERED_IRON_TRAPDOOR, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.WAXED_OXIDIZED_IRON_TRAPDOOR, BlockRenderLayer.CUTOUT);
+		BlockRenderLayerMap.putBlock(ModBlocks.WAXED_IRON_TRAPDOOR, BlockRenderLayer.CUTOUT);
 		
 		// Iron grates
 		BlockRenderLayerMap.putBlock(ModBlocks.IRON_GRATE, BlockRenderLayer.CUTOUT);
@@ -71,6 +92,16 @@ public class OuterWorldClient implements ClientModInitializer {
 		BlockRenderLayerMap.putBlock(ModBlocks.WAXED_EXPOSED_IRON_GRATE, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.WAXED_WEATHERED_IRON_GRATE, BlockRenderLayer.CUTOUT);
 		BlockRenderLayerMap.putBlock(ModBlocks.WAXED_OXIDIZED_IRON_GRATE, BlockRenderLayer.CUTOUT);
+		
+		// Iron bars (including unaffected clone and waxed vanilla)
+		BlockRenderLayerMap.putBlock(ModBlocks.UNAFFECTED_IRON_BARS, BlockRenderLayer.CUTOUT);
+		BlockRenderLayerMap.putBlock(ModBlocks.EXPOSED_IRON_BARS, BlockRenderLayer.CUTOUT);
+		BlockRenderLayerMap.putBlock(ModBlocks.WEATHERED_IRON_BARS, BlockRenderLayer.CUTOUT);
+		BlockRenderLayerMap.putBlock(ModBlocks.OXIDIZED_IRON_BARS, BlockRenderLayer.CUTOUT);
+		BlockRenderLayerMap.putBlock(ModBlocks.WAXED_EXPOSED_IRON_BARS, BlockRenderLayer.CUTOUT);
+		BlockRenderLayerMap.putBlock(ModBlocks.WAXED_WEATHERED_IRON_BARS, BlockRenderLayer.CUTOUT);
+		BlockRenderLayerMap.putBlock(ModBlocks.WAXED_OXIDIZED_IRON_BARS, BlockRenderLayer.CUTOUT);
+		BlockRenderLayerMap.putBlock(ModBlocks.WAXED_IRON_BARS, BlockRenderLayer.CUTOUT);
 	}
 }
 

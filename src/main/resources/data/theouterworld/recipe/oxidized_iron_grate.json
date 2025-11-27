@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "I I",
+    " I "
+  ],
+  "key": {
+    "I": "theouterworld:oxidized_iron"
+  },
+  "result": {
+    "id": "theouterworld:oxidized_iron_grate",
+    "count": 4
+  }
+}
+

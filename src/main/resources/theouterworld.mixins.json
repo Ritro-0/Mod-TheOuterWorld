@@ -8,7 +8,10 @@
 		"ArrowEntityGravityMixin",
 		"LivingEntityElytraFrictionMixin",
 		"OuterworldWeatherBlockerMixin",
-		"ArmorSlotGlassMixin"
+		"ArmorSlotGlassMixin",
+		"VanillaIronOnPlacedMixin",
+		"VanillaIronDoorOnPlacedMixin",
+		"IronGolemSpawnMixin"
 	],
 	"injectors": {
 		"defaultRequire": 0

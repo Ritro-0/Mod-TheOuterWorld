@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "theouterworld:waxed_exposed_cut_iron",
+  "result": {
+    "id": "theouterworld:waxed_exposed_cut_iron_slab",
+    "count": 2
+  }
+}
+

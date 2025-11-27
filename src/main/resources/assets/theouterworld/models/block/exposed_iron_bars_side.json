@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/iron_bars_side",
+  "render_type": "cutout",
+  "textures": {
+    "edge": "theouterworld:block/exposed_iron_bar",
+    "bars": "theouterworld:block/exposed_iron_bar"
+  }
+}
+

@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "theouterworld:block/weathered_cut_iron",
+    "top": "theouterworld:block/weathered_cut_iron",
+    "side": "theouterworld:block/weathered_cut_iron"
+  }
+}
+

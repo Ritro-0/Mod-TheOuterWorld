@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "theouterworld:oxidized_iron_trapdoor",
+    "minecraft:honeycomb"
+  ],
+  "result": {
+    "id": "theouterworld:waxed_oxidized_iron_trapdoor",
+    "count": 1
+  }
+}
+

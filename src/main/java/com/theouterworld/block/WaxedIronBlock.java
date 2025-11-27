@@ -2,6 +2,7 @@ package com.theouterworld.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
@@ -21,8 +22,9 @@ public class WaxedIronBlock extends Block {
         this.unwaxedVersion = unwaxedVersion;
     }
 
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, net.minecraft.entity.player.PlayerEntity player, net.minecraft.util.Hand hand, BlockHitResult hit) {
-        ItemStack stack = player.getStackInHand(hand);
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        ItemStack stack = player.getStackInHand(player.getActiveHand());
         
         // Right-click with axe to unwax (revert one stage, no honeycomb drop)
         if (stack.getItem() instanceof AxeItem) {
@@ -34,7 +36,7 @@ public class WaxedIronBlock extends Block {
                 
                 // Damage the axe
                 if (!player.isCreative()) {
-                    stack.damage(1, player, hand);
+                    stack.damage(1, player, player.getActiveHand());
                 }
                 
                 return ActionResult.SUCCESS;
@@ -49,4 +51,3 @@ public class WaxedIronBlock extends Block {
         return unwaxedVersion;
     }
 }
-

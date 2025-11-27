@@ -1,0 +1,14 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "theouterworld:block/exposed_cut_iron_slab"
+    },
+    "type=top": {
+      "model": "theouterworld:block/exposed_cut_iron_slab_top"
+    },
+    "type=double": {
+      "model": "theouterworld:block/exposed_cut_iron"
+    }
+  }
+}
+
