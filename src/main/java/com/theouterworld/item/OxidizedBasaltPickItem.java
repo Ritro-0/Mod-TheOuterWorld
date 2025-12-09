@@ -1,14 +1,32 @@
 package com.theouterworld.item;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.tag.BlockTags;
 
 public class OxidizedBasaltPickItem extends Item {
+    private static final net.minecraft.registry.tag.TagKey<net.minecraft.block.Block> PICKAXE_MINEABLE = BlockTags.PICKAXE_MINEABLE;
+    
     public OxidizedBasaltPickItem(RegistryKey<Item> registryKey, Item.Settings settings) {
-        super(settings.maxDamage(ModToolMaterials.OXIDIZED_BASALT_DURABILITY));
+        super(computeSettings(settings));
     }
     
-    // The item is tagged as a pickaxe in pickaxes.json
-    // Mining speed is set to 1.0f (same as hands) via OxidizedBasaltPickMixin
-    // This makes it a proper pickaxe that can harvest the block but adds no speed boost
+    private static Item.Settings computeSettings(Item.Settings settings) {
+        // Use the settings.pickaxe() method like Paxels does
+        return settings
+            .maxDamage(ModToolMaterials.OXIDIZED_BASALT_DURABILITY)
+            .pickaxe(
+                ModToolMaterials.OXIDIZED_BASALT,
+                ModToolMaterials.OXIDIZED_BASALT_ATTACK_DAMAGE,
+                -2.8f // attack speed (standard for pickaxes)
+            );
+    }
+    
+    @Override
+    public float getMiningSpeed(ItemStack stack, BlockState state) {
+        // Return the mining speed from ToolMaterial when block is mineable, like Paxels does
+        return state.isIn(PICKAXE_MINEABLE) ? ModToolMaterials.OXIDIZED_BASALT_MINING_SPEED : 1.0f;
+    }
 }

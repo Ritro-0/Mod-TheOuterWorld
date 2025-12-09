@@ -3,13 +3,17 @@ package com.theouterworld;
 import com.theouterworld.block.ModBlocks;
 import com.theouterworld.client.DustStormHandler;
 import com.theouterworld.client.GlassHelmetOverlay;
+import com.theouterworld.client.KnappingTableScreen;
 import com.theouterworld.client.OxidizableIronGolemEntityRenderer;
+import com.theouterworld.client.ProcessorScreen;
 import com.theouterworld.network.DustStormSyncPacket;
 import com.theouterworld.registry.ModEntities;
+import com.theouterworld.registry.ModScreenHandlers;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.BlockRenderLayer;
 
 public class OuterWorldClient implements ClientModInitializer {
@@ -41,6 +45,12 @@ public class OuterWorldClient implements ClientModInitializer {
 		
 		// Register entity renderers
 		registerEntityRenderers();
+		
+		// Register processor screen  
+		HandledScreens.register(ModScreenHandlers.PROCESSOR_SCREEN_HANDLER, ProcessorScreen::new);
+		
+		// Register knapping table screen
+		HandledScreens.register(ModScreenHandlers.KNAPPING_TABLE_SCREEN_HANDLER, KnappingTableScreen::new);
 		
 		// Note: The iron golem statue block entity renderer requires the new 1.21+ 
 		// BlockEntityRenderState API which has complex type requirements.

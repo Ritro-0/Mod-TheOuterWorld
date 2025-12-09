@@ -52,6 +52,18 @@ public class ModBlocks {
         )
     );
 
+    public static final Block OXIDIZED_BASALT_PEBBLE = registerBlock(
+        "oxidized_basalt_pebble",
+        key -> new OxidizedBasaltPebbleBlock(
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .mapColor(MapColor.GRAY)
+                .strength(1.25f, 4.2f)
+                .sounds(BlockSoundGroup.BASALT)
+                .nonOpaque()
+        )
+    );
+
     // Oxidizable Iron blocks - oxidize only in Outerworld dimension
     
     // UNAFFECTED stage clones of vanilla blocks (hidden - no BlockItems)
@@ -223,7 +235,7 @@ public class ModBlocks {
             AbstractBlock.Settings.create()
                 .registryKey(key)
                 .strength(3.0f, 3.0f)
-                .sounds(BlockSoundGroup.COPPER_BULB)
+                .sounds(BlockSoundGroup.METAL)
                 .requiresTool()
                 .ticksRandomly()
                 .luminance(state -> state.get(OxidizableIronBulbBlock.LIT) ? 15 : 0)
@@ -237,7 +249,7 @@ public class ModBlocks {
             AbstractBlock.Settings.create()
                 .registryKey(key)
                 .strength(3.0f, 3.0f)
-                .sounds(BlockSoundGroup.COPPER_BULB)
+                .sounds(BlockSoundGroup.METAL)
                 .requiresTool()
                 .ticksRandomly()
                 .luminance(state -> state.get(OxidizableIronBulbBlock.LIT) ? 12 : 0)
@@ -251,7 +263,7 @@ public class ModBlocks {
             AbstractBlock.Settings.create()
                 .registryKey(key)
                 .strength(3.0f, 3.0f)
-                .sounds(BlockSoundGroup.COPPER_BULB)
+                .sounds(BlockSoundGroup.METAL)
                 .requiresTool()
                 .ticksRandomly()
                 .luminance(state -> state.get(OxidizableIronBulbBlock.LIT) ? 8 : 0)
@@ -265,23 +277,23 @@ public class ModBlocks {
             AbstractBlock.Settings.create()
                 .registryKey(key)
                 .strength(3.0f, 3.0f)
-                .sounds(BlockSoundGroup.COPPER_BULB)
+                .sounds(BlockSoundGroup.METAL)
                 .requiresTool()
                 .luminance(state -> state.get(OxidizableIronBulbBlock.LIT) ? 4 : 0)
         )
     );
 
     public static final Block WAXED_IRON_BULB = registerBlock("waxed_iron_bulb",
-        key -> new WaxedIronBulbBlock(IRON_BULB, AbstractBlock.Settings.create().registryKey(key).strength(3.0f, 3.0f).sounds(BlockSoundGroup.COPPER_BULB).requiresTool().luminance(state -> state.get(WaxedIronBulbBlock.LIT) ? 15 : 0)));
+        key -> new WaxedIronBulbBlock(IRON_BULB, AbstractBlock.Settings.create().registryKey(key).strength(3.0f, 3.0f).sounds(BlockSoundGroup.METAL).requiresTool().luminance(state -> state.get(WaxedIronBulbBlock.LIT) ? 15 : 0)));
 
     public static final Block WAXED_EXPOSED_IRON_BULB = registerBlock("waxed_exposed_iron_bulb",
-        key -> new WaxedIronBulbBlock(EXPOSED_IRON_BULB, AbstractBlock.Settings.create().registryKey(key).strength(3.0f, 3.0f).sounds(BlockSoundGroup.COPPER_BULB).requiresTool().luminance(state -> state.get(WaxedIronBulbBlock.LIT) ? 12 : 0)));
+        key -> new WaxedIronBulbBlock(EXPOSED_IRON_BULB, AbstractBlock.Settings.create().registryKey(key).strength(3.0f, 3.0f).sounds(BlockSoundGroup.METAL).requiresTool().luminance(state -> state.get(WaxedIronBulbBlock.LIT) ? 12 : 0)));
 
     public static final Block WAXED_WEATHERED_IRON_BULB = registerBlock("waxed_weathered_iron_bulb",
-        key -> new WaxedIronBulbBlock(WEATHERED_IRON_BULB, AbstractBlock.Settings.create().registryKey(key).strength(3.0f, 3.0f).sounds(BlockSoundGroup.COPPER_BULB).requiresTool().luminance(state -> state.get(WaxedIronBulbBlock.LIT) ? 8 : 0)));
+        key -> new WaxedIronBulbBlock(WEATHERED_IRON_BULB, AbstractBlock.Settings.create().registryKey(key).strength(3.0f, 3.0f).sounds(BlockSoundGroup.METAL).requiresTool().luminance(state -> state.get(WaxedIronBulbBlock.LIT) ? 8 : 0)));
 
     public static final Block WAXED_OXIDIZED_IRON_BULB = registerBlock("waxed_oxidized_iron_bulb",
-        key -> new WaxedIronBulbBlock(OXIDIZED_IRON_BULB, AbstractBlock.Settings.create().registryKey(key).strength(3.0f, 3.0f).sounds(BlockSoundGroup.COPPER_BULB).requiresTool().luminance(state -> state.get(WaxedIronBulbBlock.LIT) ? 4 : 0)));
+        key -> new WaxedIronBulbBlock(OXIDIZED_IRON_BULB, AbstractBlock.Settings.create().registryKey(key).strength(3.0f, 3.0f).sounds(BlockSoundGroup.METAL).requiresTool().luminance(state -> state.get(WaxedIronBulbBlock.LIT) ? 4 : 0)));
 
     // Iron Chain blocks
     public static final Block UNAFFECTED_IRON_CHAIN = registerBlockOnly(
@@ -903,6 +915,623 @@ public class ModBlocks {
 
     public static final Block WAXED_OXIDIZED_CUT_IRON_STAIRS = registerBlock("waxed_oxidized_cut_iron_stairs",
         key -> new WaxedCutIronStairsBlock(OXIDIZED_CUT_IRON_STAIRS, OXIDIZED_CUT_IRON.getDefaultState(), AbstractBlock.Settings.create().registryKey(key).strength(5.0f, 6.0f).sounds(BlockSoundGroup.METAL).requiresTool()));
+
+    public static final Block PROCESSOR = registerBlock(
+        "processor",
+        key -> new ProcessorBlock(
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.5f, 3.5f)
+                .sounds(BlockSoundGroup.STONE)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+
+    // Non-oxidizable Copper blocks - replace vanilla copper blocks when placed in Outerworld
+    // These blocks look identical to vanilla copper but never oxidize
+    
+    // Base copper blocks
+    public static final Block NON_OXIDIZABLE_COPPER_BLOCK = registerBlockOnly(
+        "non_oxidizable_copper_block",
+        key -> new NonOxidizableCopperBlock(
+            Blocks.COPPER_BLOCK,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_EXPOSED_COPPER = registerBlockOnly(
+        "non_oxidizable_exposed_copper",
+        key -> new NonOxidizableCopperBlock(
+            Blocks.EXPOSED_COPPER,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_WEATHERED_COPPER = registerBlockOnly(
+        "non_oxidizable_weathered_copper",
+        key -> new NonOxidizableCopperBlock(
+            Blocks.WEATHERED_COPPER,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_OXIDIZED_COPPER = registerBlockOnly(
+        "non_oxidizable_oxidized_copper",
+        key -> new NonOxidizableCopperBlock(
+            Blocks.OXIDIZED_COPPER,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    // Cut copper blocks
+    public static final Block NON_OXIDIZABLE_CUT_COPPER = registerBlockOnly(
+        "non_oxidizable_cut_copper",
+        key -> new NonOxidizableCopperBlock(
+            Blocks.CUT_COPPER,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_EXPOSED_CUT_COPPER = registerBlockOnly(
+        "non_oxidizable_exposed_cut_copper",
+        key -> new NonOxidizableCopperBlock(
+            Blocks.EXPOSED_CUT_COPPER,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_WEATHERED_CUT_COPPER = registerBlockOnly(
+        "non_oxidizable_weathered_cut_copper",
+        key -> new NonOxidizableCopperBlock(
+            Blocks.WEATHERED_CUT_COPPER,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_OXIDIZED_CUT_COPPER = registerBlockOnly(
+        "non_oxidizable_oxidized_cut_copper",
+        key -> new NonOxidizableCopperBlock(
+            Blocks.OXIDIZED_CUT_COPPER,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    // Cut copper slabs
+    public static final Block NON_OXIDIZABLE_CUT_COPPER_SLAB = registerBlockOnly(
+        "non_oxidizable_cut_copper_slab",
+        key -> new NonOxidizableCopperSlabBlock(
+            Blocks.CUT_COPPER_SLAB,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_EXPOSED_CUT_COPPER_SLAB = registerBlockOnly(
+        "non_oxidizable_exposed_cut_copper_slab",
+        key -> new NonOxidizableCopperSlabBlock(
+            Blocks.EXPOSED_CUT_COPPER_SLAB,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_WEATHERED_CUT_COPPER_SLAB = registerBlockOnly(
+        "non_oxidizable_weathered_cut_copper_slab",
+        key -> new NonOxidizableCopperSlabBlock(
+            Blocks.WEATHERED_CUT_COPPER_SLAB,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_OXIDIZED_CUT_COPPER_SLAB = registerBlockOnly(
+        "non_oxidizable_oxidized_cut_copper_slab",
+        key -> new NonOxidizableCopperSlabBlock(
+            Blocks.OXIDIZED_CUT_COPPER_SLAB,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    // Cut copper stairs
+    public static final Block NON_OXIDIZABLE_CUT_COPPER_STAIRS = registerBlockOnly(
+        "non_oxidizable_cut_copper_stairs",
+        key -> new NonOxidizableCopperStairsBlock(
+            Blocks.CUT_COPPER_STAIRS,
+            Blocks.CUT_COPPER.getDefaultState(),
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_EXPOSED_CUT_COPPER_STAIRS = registerBlockOnly(
+        "non_oxidizable_exposed_cut_copper_stairs",
+        key -> new NonOxidizableCopperStairsBlock(
+            Blocks.EXPOSED_CUT_COPPER_STAIRS,
+            Blocks.EXPOSED_CUT_COPPER.getDefaultState(),
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_WEATHERED_CUT_COPPER_STAIRS = registerBlockOnly(
+        "non_oxidizable_weathered_cut_copper_stairs",
+        key -> new NonOxidizableCopperStairsBlock(
+            Blocks.WEATHERED_CUT_COPPER_STAIRS,
+            Blocks.WEATHERED_CUT_COPPER.getDefaultState(),
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_OXIDIZED_CUT_COPPER_STAIRS = registerBlockOnly(
+        "non_oxidizable_oxidized_cut_copper_stairs",
+        key -> new NonOxidizableCopperStairsBlock(
+            Blocks.OXIDIZED_CUT_COPPER_STAIRS,
+            Blocks.OXIDIZED_CUT_COPPER.getDefaultState(),
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    // Copper bulbs
+    public static final Block NON_OXIDIZABLE_COPPER_BULB = registerBlockOnly(
+        "non_oxidizable_copper_bulb",
+        key -> new NonOxidizableCopperBulbBlock(
+            Blocks.COPPER_BULB,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 3.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .luminance(state -> state.get(net.minecraft.state.property.Properties.LIT) ? 15 : 0)
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_EXPOSED_COPPER_BULB = registerBlockOnly(
+        "non_oxidizable_exposed_copper_bulb",
+        key -> new NonOxidizableCopperBulbBlock(
+            Blocks.EXPOSED_COPPER_BULB,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 3.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .luminance(state -> state.get(net.minecraft.state.property.Properties.LIT) ? 12 : 0)
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_WEATHERED_COPPER_BULB = registerBlockOnly(
+        "non_oxidizable_weathered_copper_bulb",
+        key -> new NonOxidizableCopperBulbBlock(
+            Blocks.WEATHERED_COPPER_BULB,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 3.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .luminance(state -> state.get(net.minecraft.state.property.Properties.LIT) ? 8 : 0)
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_OXIDIZED_COPPER_BULB = registerBlockOnly(
+        "non_oxidizable_oxidized_copper_bulb",
+        key -> new NonOxidizableCopperBulbBlock(
+            Blocks.OXIDIZED_COPPER_BULB,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 3.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .luminance(state -> state.get(net.minecraft.state.property.Properties.LIT) ? 4 : 0)
+        )
+    );
+    
+    // Copper grates
+    public static final Block NON_OXIDIZABLE_COPPER_GRATE = registerBlockOnly(
+        "non_oxidizable_copper_grate",
+        key -> new NonOxidizableCopperGrateBlock(
+            Blocks.COPPER_GRATE,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_EXPOSED_COPPER_GRATE = registerBlockOnly(
+        "non_oxidizable_exposed_copper_grate",
+        key -> new NonOxidizableCopperGrateBlock(
+            Blocks.EXPOSED_COPPER_GRATE,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_WEATHERED_COPPER_GRATE = registerBlockOnly(
+        "non_oxidizable_weathered_copper_grate",
+        key -> new NonOxidizableCopperGrateBlock(
+            Blocks.WEATHERED_COPPER_GRATE,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_OXIDIZED_COPPER_GRATE = registerBlockOnly(
+        "non_oxidizable_oxidized_copper_grate",
+        key -> new NonOxidizableCopperGrateBlock(
+            Blocks.OXIDIZED_COPPER_GRATE,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+    
+    // Copper doors
+    public static final Block NON_OXIDIZABLE_COPPER_DOOR = registerBlockOnly(
+        "non_oxidizable_copper_door",
+        key -> new NonOxidizableCopperDoorBlock(
+            Blocks.COPPER_DOOR,
+            net.minecraft.block.BlockSetType.COPPER,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_EXPOSED_COPPER_DOOR = registerBlockOnly(
+        "non_oxidizable_exposed_copper_door",
+        key -> new NonOxidizableCopperDoorBlock(
+            Blocks.EXPOSED_COPPER_DOOR,
+            net.minecraft.block.BlockSetType.COPPER,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_WEATHERED_COPPER_DOOR = registerBlockOnly(
+        "non_oxidizable_weathered_copper_door",
+        key -> new NonOxidizableCopperDoorBlock(
+            Blocks.WEATHERED_COPPER_DOOR,
+            net.minecraft.block.BlockSetType.COPPER,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_OXIDIZED_COPPER_DOOR = registerBlockOnly(
+        "non_oxidizable_oxidized_copper_door",
+        key -> new NonOxidizableCopperDoorBlock(
+            Blocks.OXIDIZED_COPPER_DOOR,
+            net.minecraft.block.BlockSetType.COPPER,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+    
+    // Copper trapdoors
+    public static final Block NON_OXIDIZABLE_COPPER_TRAPDOOR = registerBlockOnly(
+        "non_oxidizable_copper_trapdoor",
+        key -> new NonOxidizableCopperTrapdoorBlock(
+            Blocks.COPPER_TRAPDOOR,
+            net.minecraft.block.BlockSetType.COPPER,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_EXPOSED_COPPER_TRAPDOOR = registerBlockOnly(
+        "non_oxidizable_exposed_copper_trapdoor",
+        key -> new NonOxidizableCopperTrapdoorBlock(
+            Blocks.EXPOSED_COPPER_TRAPDOOR,
+            net.minecraft.block.BlockSetType.COPPER,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_WEATHERED_COPPER_TRAPDOOR = registerBlockOnly(
+        "non_oxidizable_weathered_copper_trapdoor",
+        key -> new NonOxidizableCopperTrapdoorBlock(
+            Blocks.WEATHERED_COPPER_TRAPDOOR,
+            net.minecraft.block.BlockSetType.COPPER,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_OXIDIZED_COPPER_TRAPDOOR = registerBlockOnly(
+        "non_oxidizable_oxidized_copper_trapdoor",
+        key -> new NonOxidizableCopperTrapdoorBlock(
+            Blocks.OXIDIZED_COPPER_TRAPDOOR,
+            net.minecraft.block.BlockSetType.COPPER,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+    
+    // Chiseled copper blocks
+    public static final Block NON_OXIDIZABLE_CHISELED_COPPER = registerBlockOnly(
+        "non_oxidizable_chiseled_copper",
+        key -> new NonOxidizableCopperBlock(
+            Blocks.CHISELED_COPPER,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_EXPOSED_CHISELED_COPPER = registerBlockOnly(
+        "non_oxidizable_exposed_chiseled_copper",
+        key -> new NonOxidizableCopperBlock(
+            Blocks.EXPOSED_CHISELED_COPPER,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_WEATHERED_CHISELED_COPPER = registerBlockOnly(
+        "non_oxidizable_weathered_chiseled_copper",
+        key -> new NonOxidizableCopperBlock(
+            Blocks.WEATHERED_CHISELED_COPPER,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_OXIDIZED_CHISELED_COPPER = registerBlockOnly(
+        "non_oxidizable_oxidized_chiseled_copper",
+        key -> new NonOxidizableCopperBlock(
+            Blocks.OXIDIZED_CHISELED_COPPER,
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+        )
+    );
+    
+    // Copper bars
+    public static final Block NON_OXIDIZABLE_COPPER_BARS = registerBlockOnly(
+        "non_oxidizable_copper_bars",
+        key -> new NonOxidizableCopperBarsBlock(
+            net.minecraft.registry.Registries.BLOCK.get(net.minecraft.util.Identifier.ofVanilla("copper_bars")),
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_EXPOSED_COPPER_BARS = registerBlockOnly(
+        "non_oxidizable_exposed_copper_bars",
+        key -> new NonOxidizableCopperBarsBlock(
+            net.minecraft.registry.Registries.BLOCK.get(net.minecraft.util.Identifier.ofVanilla("exposed_copper_bars")),
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_WEATHERED_COPPER_BARS = registerBlockOnly(
+        "non_oxidizable_weathered_copper_bars",
+        key -> new NonOxidizableCopperBarsBlock(
+            net.minecraft.registry.Registries.BLOCK.get(net.minecraft.util.Identifier.ofVanilla("weathered_copper_bars")),
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_OXIDIZED_COPPER_BARS = registerBlockOnly(
+        "non_oxidizable_oxidized_copper_bars",
+        key -> new NonOxidizableCopperBarsBlock(
+            net.minecraft.registry.Registries.BLOCK.get(net.minecraft.util.Identifier.ofVanilla("oxidized_copper_bars")),
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.COPPER)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+    
+    // Copper chains
+    public static final Block NON_OXIDIZABLE_COPPER_CHAIN = registerBlockOnly(
+        "non_oxidizable_copper_chain",
+        key -> new NonOxidizableCopperChainBlock(
+            net.minecraft.registry.Registries.BLOCK.get(net.minecraft.util.Identifier.ofVanilla("copper_chain")),
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.CHAIN)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_EXPOSED_COPPER_CHAIN = registerBlockOnly(
+        "non_oxidizable_exposed_copper_chain",
+        key -> new NonOxidizableCopperChainBlock(
+            net.minecraft.registry.Registries.BLOCK.get(net.minecraft.util.Identifier.ofVanilla("exposed_copper_chain")),
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.CHAIN)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_WEATHERED_COPPER_CHAIN = registerBlockOnly(
+        "non_oxidizable_weathered_copper_chain",
+        key -> new NonOxidizableCopperChainBlock(
+            net.minecraft.registry.Registries.BLOCK.get(net.minecraft.util.Identifier.ofVanilla("weathered_copper_chain")),
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.CHAIN)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+    
+    public static final Block NON_OXIDIZABLE_OXIDIZED_COPPER_CHAIN = registerBlockOnly(
+        "non_oxidizable_oxidized_copper_chain",
+        key -> new NonOxidizableCopperChainBlock(
+            net.minecraft.registry.Registries.BLOCK.get(net.minecraft.util.Identifier.ofVanilla("oxidized_copper_chain")),
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(3.0f, 6.0f)
+                .sounds(BlockSoundGroup.CHAIN)
+                .requiresTool()
+                .nonOpaque()
+        )
+    );
+
+    public static final Block KNAPPING_TABLE = registerBlock(
+        "knapping_table",
+        key -> new KnappingTableBlock(
+            AbstractBlock.Settings.create()
+                .registryKey(key)
+                .strength(2.5f, 2.5f)
+                .sounds(BlockSoundGroup.WOOD)
+                .nonOpaque()
+        )
+    );
+
+    // TODO: Add copper lightning rod blocks
+    // - Create OxidizableCopperLightningRodBlock class
+    // - Should have oxidation stages: unaffected -> exposed -> weathered -> oxidized
+    // - Should function like vanilla lightning rod but oxidize in Outerworld
+    // - Should be waxable with honeycomb
+    // - Should be scrapable with axe to de-oxidize
+    // - Register all oxidation stages and waxed versions
+    
+    // TODO: Add copper golem statue blocks
+    // - Create CopperGolemStatueBlock class similar to IronGolemStatueBlock
+    // - Should have oxidation stages: unaffected -> exposed -> weathered -> oxidized
+    // - Should be scrapable with axe to de-oxidize
+    // - Scraping unaffected version should reanimate into copper golem
+    // - Should be waxable with honeycomb
+    // - Register all oxidation stages and waxed versions
 
     private static Block registerBlock(String name, java.util.function.Function<RegistryKey<Block>, Block> factory) {
         Identifier id = Identifier.of(OuterWorldMod.MOD_ID, name);

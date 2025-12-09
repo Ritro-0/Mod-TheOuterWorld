@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "#",
+    "#"
+  ],
+  "key": {
+    "X": "theouterworld:oxidized_basalt",
+    "#": "theouterworld:rust_splint"
+  },
+  "result": {
+    "id": "theouterworld:oxidized_basalt_shovel",
+    "count": 1
+  }
+}
+

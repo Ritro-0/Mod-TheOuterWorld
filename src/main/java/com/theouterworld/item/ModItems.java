@@ -25,14 +25,6 @@ public class ModItems {
 		)
 	);
 
-	public static final Item OXIDIZED_BASALT_PEBBLE = registerItem(
-		"oxidized_basalt_pebble",
-		key -> new Item(
-			new Item.Settings()
-				.registryKey(key)
-		)
-	);
-
 	public static final Item OXIDIZED_BASALT_ROCK = registerItem(
 		"oxidized_basalt_rock",
 		key -> new Item(
@@ -45,6 +37,67 @@ public class ModItems {
 		"oxidized_basalt_pick",
 		key -> new OxidizedBasaltPickItem(
 			key,
+			new Item.Settings()
+				.registryKey(key)
+		)
+	);
+
+	public static final Item OXIDIZED_BASALT_SWORD = registerItem(
+		"oxidized_basalt_sword",
+		key -> new OxidizedBasaltSwordItem(
+			key,
+			new Item.Settings()
+				.registryKey(key)
+		)
+	);
+
+	public static final Item OXIDIZED_BASALT_AXE = registerItem(
+		"oxidized_basalt_axe",
+		key -> new OxidizedBasaltAxeItem(
+			key,
+			new Item.Settings()
+				.registryKey(key)
+		)
+	);
+
+	public static final Item OXIDIZED_BASALT_PICKAXE = registerItem(
+		"oxidized_basalt_pickaxe",
+		key -> new OxidizedBasaltPickaxeItem(
+			key,
+			new Item.Settings()
+				.registryKey(key)
+		)
+	);
+
+	public static final Item OXIDIZED_BASALT_SHOVEL = registerItem(
+		"oxidized_basalt_shovel",
+		key -> new OxidizedBasaltShovelItem(
+			key,
+			new Item.Settings()
+				.registryKey(key)
+		)
+	);
+
+	public static final Item OXIDIZED_BASALT_HOE = registerItem(
+		"oxidized_basalt_hoe",
+		key -> new OxidizedBasaltHoeItem(
+			key,
+			new Item.Settings()
+				.registryKey(key)
+		)
+	);
+
+	public static final Item RAW_OXIDIZED_IRON = registerItem(
+		"raw_oxidized_iron",
+		key -> new Item(
+			new Item.Settings()
+				.registryKey(key)
+		)
+	);
+
+	public static final Item RUST_SPLINT = registerItem(
+		"rust_splint",
+		key -> new Item(
 			new Item.Settings()
 				.registryKey(key)
 		)

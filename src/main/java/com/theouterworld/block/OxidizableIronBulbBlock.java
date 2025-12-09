@@ -17,6 +17,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
@@ -87,8 +88,8 @@ public class OxidizableIronBulbBlock extends Block implements Oxidizable {
         // Toggle LIT
         BlockState newState = state.cycle(LIT);
         world.setBlockState(pos, newState, Block.NOTIFY_ALL);
-        // Play vanilla copper bulb toggle sound
-        world.playSound(null, pos, newState.get(LIT) ? SoundEvents.BLOCK_COPPER_BULB_TURN_ON : SoundEvents.BLOCK_COPPER_BULB_TURN_OFF,
+        // Play iron block click sound (using metal block sounds)
+        world.playSound(null, pos, newState.get(LIT) ? SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_ON : SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF,
                         SoundCategory.BLOCKS, 0.4F, newState.get(LIT) ? 0.8F : 1.2F);
     }
 
@@ -105,7 +106,10 @@ public class OxidizableIronBulbBlock extends Block implements Oxidizable {
         if (nextState.isPresent()) {
             float chance = OxidizableIronBehavior.getOxidationChance(this.degradationLevel, 0);
             if (random.nextFloat() < chance) {
-                world.setBlockState(pos, nextState.get());
+                // Use NOTIFY_LISTENERS instead of NOTIFY_ALL to prevent neighbor updates
+                // This prevents redstone updates that cause flickering during oxidation
+                // The block state (LIT/POWERED) is preserved exactly, and updates can happen normally after oxidation
+                world.setBlockState(pos, nextState.get(), Block.NOTIFY_LISTENERS);
             }
         }
     }
@@ -122,35 +126,22 @@ public class OxidizableIronBulbBlock extends Block implements Oxidizable {
 
     @Override
     public Optional<BlockState> getDegradationResult(BlockState state) {
+        // Get the next oxidation block and preserve LIT and POWERED properties
         return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).map(block -> {
             BlockState newState = block.getDefaultState();
-            if (newState.contains(LIT)) {
+            // Explicitly preserve LIT and POWERED states across oxidation
+            if (newState.contains(LIT) && state.contains(LIT)) {
                 newState = newState.with(LIT, state.get(LIT));
             }
-            if (newState.contains(POWERED)) {
+            if (newState.contains(POWERED) && state.contains(POWERED)) {
                 newState = newState.with(POWERED, state.get(POWERED));
             }
             return newState;
         });
     }
 
-    protected boolean hasComparatorOutput(BlockState state) {
-        return true;
-    }
-
-    protected int getComparatorOutput(BlockState state, World world, BlockPos pos) {
-        // Like copper bulbs: output signal based on oxidation level when lit
-        // Higher oxidation = lower output (opposite of light level)
-        if (!state.get(LIT)) {
-            return 0;
-        }
-        return switch (this.degradationLevel) {
-            case UNAFFECTED -> 15;  // Full signal when fresh
-            case EXPOSED -> 12;
-            case WEATHERED -> 8;
-            case OXIDIZED -> 4;
-        };
-    }
+    // TODO: Implement comparator output based on oxidation level (15/12/8/4 when lit, 0 when not lit)
+    // This requires proper method override or mixin - needs investigation for Minecraft 1.21.10
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
@@ -176,13 +167,8 @@ public class OxidizableIronBulbBlock extends Block implements Oxidizable {
             Optional<Block> previousBlock = Oxidizable.getDecreasedOxidationBlock(state.getBlock());
             if (previousBlock.isPresent()) {
                 if (!world.isClient()) {
-                    BlockState newState = previousBlock.get().getDefaultState();
-                    if (newState.contains(LIT)) {
-                        newState = newState.with(LIT, state.get(LIT));
-                    }
-                    if (newState.contains(POWERED)) {
-                        newState = newState.with(POWERED, state.get(POWERED));
-                    }
+                    // Use getStateWithProperties to preserve all compatible properties
+                    BlockState newState = previousBlock.get().getStateWithProperties(state);
                     world.setBlockState(pos, newState);
                     world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(state));
                     world.playSound(null, pos, SoundEvents.ITEM_AXE_SCRAPE, SoundCategory.BLOCKS, 1.0f, 1.0f);
@@ -196,5 +182,10 @@ public class OxidizableIronBulbBlock extends Block implements Oxidizable {
         }
         
         return ActionResult.PASS;
+    }
+    
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
+        // Return vanilla iron block for middle-click in creative (iron bulbs don't exist in vanilla)
+        return new ItemStack(net.minecraft.block.Blocks.IRON_BLOCK);
     }
 }

@@ -28,6 +28,23 @@ public class ModEntities {
         // Register entity attributes
         FabricDefaultAttributeRegistry.register(OXIDIZABLE_IRON_GOLEM, 
             OxidizableIronGolemEntity.createOxidizableIronGolemAttributes());
+        
+        // TODO: Register copper golem entity
+        // - Create OxidizableCopperGolemEntity class similar to OxidizableIronGolemEntity
+        // - Should oxidize over time in Outerworld dimension
+        // - Can be waxed with honeycomb to prevent oxidation
+        // - Can be scraped with axe to de-oxidize
+        
+        // TODO: Register lunar warden entity
+        // - Create LunarWardenEntity class (boss entity)
+        // - Should have unique fight mechanics
+        // - Should spawn in basalt cathedral structure
+        
+        // TODO: Register book authors' soul entity
+        // - Create BookAuthorsSoulEntity class
+        // - Should be released from lunar warden upon defeat
+        // - Should join player in combat as an ally
+        // - Should have unique AI to assist player
     }
 }
 

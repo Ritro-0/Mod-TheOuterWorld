@@ -7,12 +7,11 @@
           "predicate_type": "minecraft:always_true"
         },
         "input_predicate": {
-          "predicate_type": "minecraft:random_block_match",
-          "block": "minecraft:copper_block",
-          "probability": 0.1
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:copper_block"
         },
         "output_state": {
-          "Name": "minecraft:oxidized_copper"
+          "Name": "theouterworld:non_oxidizable_copper_block"
         }
       },
       {
@@ -20,12 +19,11 @@
           "predicate_type": "minecraft:always_true"
         },
         "input_predicate": {
-          "predicate_type": "minecraft:random_block_match",
-          "block": "minecraft:copper_block",
-          "probability": 0.3
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:exposed_copper"
         },
         "output_state": {
-          "Name": "minecraft:weathered_copper"
+          "Name": "theouterworld:non_oxidizable_copper_block"
         }
       },
       {
@@ -33,15 +31,505 @@
           "predicate_type": "minecraft:always_true"
         },
         "input_predicate": {
-          "predicate_type": "minecraft:random_block_match",
-          "block": "minecraft:copper_block",
-          "probability": 0.5
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:weathered_copper"
         },
         "output_state": {
-          "Name": "minecraft:exposed_copper"
+          "Name": "theouterworld:non_oxidizable_copper_block"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:oxidized_copper"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_block"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:cut_copper"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_cut_copper"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:exposed_cut_copper"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_cut_copper"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:weathered_cut_copper"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_cut_copper"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:oxidized_cut_copper"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_cut_copper"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:chiseled_copper"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_chiseled_copper"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:exposed_chiseled_copper"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_chiseled_copper"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:weathered_chiseled_copper"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_chiseled_copper"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:oxidized_chiseled_copper"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_chiseled_copper"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:cut_copper_slab"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_cut_copper_slab"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:exposed_cut_copper_slab"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_cut_copper_slab"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:weathered_cut_copper_slab"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_cut_copper_slab"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:oxidized_cut_copper_slab"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_cut_copper_slab"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:cut_copper_stairs"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_cut_copper_stairs"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:exposed_cut_copper_stairs"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_cut_copper_stairs"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:weathered_cut_copper_stairs"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_cut_copper_stairs"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:oxidized_cut_copper_stairs"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_cut_copper_stairs"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:copper_bulb"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_bulb"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:exposed_copper_bulb"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_bulb"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:weathered_copper_bulb"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_bulb"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:oxidized_copper_bulb"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_bulb"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:copper_grate"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_grate"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:exposed_copper_grate"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_grate"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:weathered_copper_grate"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_grate"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:oxidized_copper_grate"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_grate"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:copper_door"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_door"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:exposed_copper_door"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_door"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:weathered_copper_door"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_door"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:oxidized_copper_door"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_door"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:copper_trapdoor"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_trapdoor"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:exposed_copper_trapdoor"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_trapdoor"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:weathered_copper_trapdoor"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_trapdoor"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:oxidized_copper_trapdoor"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_trapdoor"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:copper_bars"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_bars"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:exposed_copper_bars"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_bars"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:weathered_copper_bars"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_bars"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:oxidized_copper_bars"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_bars"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:copper_chain"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_chain"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:exposed_copper_chain"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_chain"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:weathered_copper_chain"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_chain"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:oxidized_copper_chain"
+        },
+        "output_state": {
+          "Name": "theouterworld:non_oxidizable_copper_chain"
         }
       }
     ]
   }
 ]
-

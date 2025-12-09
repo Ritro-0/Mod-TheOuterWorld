@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "X": "theouterworld:oxidized_basalt",
+    "#": "theouterworld:rust_splint"
+  },
+  "result": {
+    "id": "theouterworld:oxidized_basalt_pickaxe",
+    "count": 1
+  }
+}
+

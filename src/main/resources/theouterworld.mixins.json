@@ -11,6 +11,8 @@
 		"ArmorSlotGlassMixin",
 		"VanillaIronOnPlacedMixin",
 		"VanillaIronDoorOnPlacedMixin",
+		"VanillaCopperOnPlacedMixin",
+		"VanillaCopperDoorOnPlacedMixin",
 		"IronGolemSpawnMixin"
 	],
 	"injectors": {

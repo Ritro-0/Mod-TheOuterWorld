@@ -76,31 +76,13 @@ public class WaxedIronBulbBlock extends Block {
         // Toggle LIT
         BlockState newState = state.cycle(LIT);
         world.setBlockState(pos, newState, Block.NOTIFY_ALL);
-        // Play vanilla copper bulb toggle sound
-        world.playSound(null, pos, newState.get(LIT) ? SoundEvents.BLOCK_COPPER_BULB_TURN_ON : SoundEvents.BLOCK_COPPER_BULB_TURN_OFF,
+        // Play iron block click sound (using metal block sounds)
+        world.playSound(null, pos, newState.get(LIT) ? SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_ON : SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF,
                         SoundCategory.BLOCKS, 0.4F, newState.get(LIT) ? 0.8F : 1.2F);
     }
 
-    protected boolean hasComparatorOutput(BlockState state) {
-        return true;
-    }
-
-    protected int getComparatorOutput(BlockState state, World world, BlockPos pos) {
-        // Output signal based on the unwaxed version's oxidation level when lit
-        if (!state.get(LIT)) {
-            return 0;
-        }
-        // Get oxidation level from the unwaxed version
-        if (unwaxedVersion instanceof OxidizableIronBulbBlock oxidizable) {
-            return switch (oxidizable.getDegradationLevel()) {
-                case UNAFFECTED -> 15;
-                case EXPOSED -> 12;
-                case WEATHERED -> 8;
-                case OXIDIZED -> 4;
-            };
-        }
-        return 15; // Default to full signal
-    }
+    // TODO: Implement comparator output based on oxidation level (15/12/8/4 when lit, 0 when not lit)
+    // This requires proper method override or mixin - needs investigation for Minecraft 1.21.10
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {

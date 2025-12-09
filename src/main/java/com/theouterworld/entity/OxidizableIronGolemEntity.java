@@ -111,6 +111,22 @@ public class OxidizableIronGolemEntity extends IronGolemEntity {
     public void tick() {
         super.tick();
         
+        // TODO: Add random chance for golems to jump hundreds of blocks in the air in low gravity biome
+        // - When golem performs a jump action in low gravity biome, add random chance for super jump
+        // - Check if golem is in low gravity biome (Outerworld dimension)
+        // - On jump, roll random chance (e.g., 1-5% chance) for super jump
+        // - If triggered, apply massive upward velocity (hundreds of blocks worth)
+        // - This should be a fun feature, not a bug - golems can accidentally launch themselves!
+        // - Consider adding visual/audio effects when super jump occurs
+        
+        // TODO: Add basalt weights for iron golems' feet to avoid super jumping
+        // - Create basalt weight item/block that can be equipped to golems
+        // - When equipped, golems should have increased weight/mass
+        // - This should prevent the random super jump behavior in low gravity
+        // - Could be implemented as an equipment slot or persistent effect
+        // - Check for basalt weights in golem's inventory or as equipped item
+        // - Players can use this to prevent golems from accidentally launching themselves
+        
         World world = getEntityWorld();
         // Only process on server side
         if (!world.isClient() && world instanceof ServerWorld serverWorld) {

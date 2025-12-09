@@ -1,0 +1,5 @@
+{
+  "parent": "minecraft:block/oxidized_copper_bars_post",
+  "render_type": "cutout"
+}
+

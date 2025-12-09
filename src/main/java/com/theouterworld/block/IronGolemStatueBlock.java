@@ -41,6 +41,10 @@ import java.util.Optional;
  * Iron Golem Statue block - a petrified iron golem.
  * Can be scraped with an axe to de-oxidize, and scraping the unaffected version
  * will reanimate it into a living iron golem.
+ * 
+ * TODO: Create similar CopperGolemStatueBlock for copper golems
+ * - Should follow same pattern as IronGolemStatueBlock
+ * - Should reanimate into copper golem when scraped at unaffected stage
  */
 public class IronGolemStatueBlock extends BlockWithEntity implements Waterloggable, Oxidizable {
     

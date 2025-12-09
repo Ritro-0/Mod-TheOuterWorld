@@ -1,20 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " R ",
-    " S ",
-    " S "
+    " O",
+    "O "
   ],
   "key": {
-    "R": {
-      "item": "theouterworld:oxidized_basalt_rock"
-    },
-    "S": {
-      "item": "minecraft:stick"
-    }
+    "O": "theouterworld:oxidized_basalt_rock"
   },
   "result": {
-    "item": "theouterworld:oxidized_basalt_pick"
+    "id": "theouterworld:oxidized_basalt_pick",
+    "count": 1
   }
 }
-

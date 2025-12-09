@@ -11,7 +11,8 @@
     [],
     [],
     [
-      "theouterworld:basalt_pillar"
+      "theouterworld:basalt_pillar",
+      "theouterworld:oxidized_basalt_pebble"
     ],
     [],
     [],
@@ -19,6 +20,13 @@
     [],
     [],
     [],
+    [
+      "theouterworld:anorthosite_copper_ore",
+      "theouterworld:anorthosite_gold_ore",
+      "theouterworld:anorthosite_redstone_ore",
+      "theouterworld:anorthosite_oxidized_iron_ore",
+      "theouterworld:anorthosite_oxidized_iron_ore_extra_deep"
+    ],
     []
   ],
   "has_precipitation": false,
@@ -35,4 +43,3 @@
   },
   "temperature": 2.0
 }
-

@@ -13,9 +13,11 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
 
 import java.util.Optional;
@@ -99,6 +101,11 @@ public class OxidizableIronBarsBlock extends PaneBlock implements Oxidizable {
         }
         
         return ActionResult.PASS;
+    }
+    
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
+        // Return vanilla iron bars for middle-click in creative
+        return new ItemStack(net.minecraft.block.Blocks.IRON_BARS);
     }
 }
 

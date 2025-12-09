@@ -15,6 +15,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
 
 import java.util.Optional;
@@ -67,6 +68,11 @@ public class OxidizableIronBlock extends Block implements Oxidizable {
     public Optional<BlockState> getDegradationResult(BlockState state) {
         // This returns the NEXT oxidation stage (more oxidized)
         return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).map(block -> block.getStateWithProperties(state));
+    }
+    
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
+        // Return vanilla iron block for middle-click in creative
+        return new ItemStack(net.minecraft.block.Blocks.IRON_BLOCK);
     }
 
     @Override

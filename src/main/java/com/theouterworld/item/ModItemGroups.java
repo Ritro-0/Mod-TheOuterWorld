@@ -79,6 +79,7 @@ public class ModItemGroups {
                 entries.add(ModBlocks.ANORTHOSITE_GOLD_ORE);
                 entries.add(ModBlocks.ANORTHOSITE_OXIDIZED_IRON_ORE);
                 entries.add(ModBlocks.ANORTHOSITE_REDSTONE_ORE);
+                entries.add(ModItems.RAW_OXIDIZED_IRON);
                 entries.add(ModBlocks.CUT_IRON);
                 entries.add(ModBlocks.EXPOSED_CUT_IRON);
                 entries.add(ModBlocks.WEATHERED_CUT_IRON);
@@ -103,9 +104,17 @@ public class ModItemGroups {
                 entries.add(ModBlocks.WAXED_EXPOSED_CUT_IRON_STAIRS);
                 entries.add(ModBlocks.WAXED_WEATHERED_CUT_IRON_STAIRS);
                 entries.add(ModBlocks.WAXED_OXIDIZED_CUT_IRON_STAIRS);
-                entries.add(ModItems.OXIDIZED_BASALT_PEBBLE);
+                entries.add(ModBlocks.OXIDIZED_BASALT_PEBBLE);
                 entries.add(ModItems.OXIDIZED_BASALT_ROCK);
                 entries.add(ModItems.OXIDIZED_BASALT_PICK);
+                entries.add(ModItems.OXIDIZED_BASALT_SWORD);
+                entries.add(ModItems.OXIDIZED_BASALT_AXE);
+                entries.add(ModItems.OXIDIZED_BASALT_PICKAXE);
+                entries.add(ModItems.OXIDIZED_BASALT_SHOVEL);
+                entries.add(ModItems.OXIDIZED_BASALT_HOE);
+                entries.add(ModBlocks.PROCESSOR);
+                entries.add(ModItems.RUST_SPLINT);
+                entries.add(ModBlocks.KNAPPING_TABLE);
             })
             .build());
 

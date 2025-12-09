@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OO",
+    "OO"
+  ],
+  "key": {
+    "O": "theouterworld:oxidized_basalt"
+  },
+  "result": {
+    "id": "theouterworld:knapping_table",
+    "count": 1
+  }
+}
+

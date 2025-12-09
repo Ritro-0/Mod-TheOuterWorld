@@ -7,12 +7,120 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "theouterworld:research_laboratory",
+        "location": "theouterworld:research_outpost",
+        "processors": "theouterworld:copper_oxidization",
+        "override_liquid_settings": "ignore_waterlogging"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "theouterworld:research_outpost1",
+        "processors": "theouterworld:copper_oxidization",
+        "override_liquid_settings": "ignore_waterlogging"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "theouterworld:research_outpost2",
+        "processors": "theouterworld:copper_oxidization",
+        "override_liquid_settings": "ignore_waterlogging"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "theouterworld:research_outpost3",
+        "processors": "theouterworld:copper_oxidization",
+        "override_liquid_settings": "ignore_waterlogging"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "theouterworld:research_outpost4",
+        "processors": "theouterworld:copper_oxidization",
+        "override_liquid_settings": "ignore_waterlogging"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "theouterworld:research_outpost5",
+        "processors": "theouterworld:copper_oxidization",
+        "override_liquid_settings": "ignore_waterlogging"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "theouterworld:research_outpost6",
+        "processors": "theouterworld:copper_oxidization",
+        "override_liquid_settings": "ignore_waterlogging"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "theouterworld:research_outpost7",
+        "processors": "theouterworld:copper_oxidization",
+        "override_liquid_settings": "ignore_waterlogging"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "theouterworld:research_outpost8",
+        "processors": "theouterworld:copper_oxidization",
+        "override_liquid_settings": "ignore_waterlogging"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "theouterworld:research_outpost9",
+        "processors": "theouterworld:copper_oxidization",
+        "override_liquid_settings": "ignore_waterlogging"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "theouterworld:research_outpost10",
+        "processors": "theouterworld:copper_oxidization",
+        "override_liquid_settings": "ignore_waterlogging"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "theouterworld:research_outpost11",
         "processors": "theouterworld:copper_oxidization",
         "override_liquid_settings": "ignore_waterlogging"
       }
     }
   ]
 }
-
-

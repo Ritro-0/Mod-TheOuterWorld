@@ -1,0 +1,5 @@
+{
+  "parent": "minecraft:block/oxidized_copper_grate",
+  "render_type": "cutout"
+}
+
